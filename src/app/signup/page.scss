@@ -1,0 +1,87 @@
+.background-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url('/login.png');
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.wrapper {
+    width: 420px;
+    background: transparent;
+    color: #fff;
+    padding: 30px 40px;
+    border: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    backdrop-filter: blur(50px);
+    border-radius: 10px;
+
+    h1 {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .input-box {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        margin: 20px 0;
+        font-size: 16px;
+        padding: 10px;
+
+        input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: 2px solid rgb(255, 255, 255, .2);
+            outline: none;
+            border-radius: 40px;
+            font-size: 16px;
+            padding: 20px 45px 20px 20px;
+        }
+
+        input::placeholder {
+            color: #fff;
+        }
+
+        .icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-5);
+        }
+    }
+
+    button {
+        width: 100%;
+        height: 45px;
+        background: #fff;
+        border: none;
+        outline: none;
+        border-radius: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, -1);
+        cursor: pointer;
+        font-size: 16px;
+        color: #333;
+        font-weight: 700;
+    }
+
+    .swap-page {
+        font-size: 14.5px;
+        text-align: center;
+        margin-top: 20px;
+
+        .link {
+            cursor: pointer;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    }
+}
