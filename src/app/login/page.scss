@@ -4,11 +4,17 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-image: url('/login.png');
+    background-image: url('/login1.png');
     background-size: cover;
     background-position: center;
     width: 100vw;
     height: 100vh;
+}
+
+
+.blur {
+    filter: blur(5px);
+    transition: filter 0.5s ease;
 }
 
 .wrapper {
