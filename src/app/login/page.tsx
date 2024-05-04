@@ -25,7 +25,8 @@ const LoginPage = () => {
             toast.success("Login success");
             router.push("/profile");
         } catch (error: any) {
-            console.log("Login failed", error.message);
+            console.log(error.message);
+            error = error.response.data
             toast.error(error.message);
         } finally {
             setLoading(false);
