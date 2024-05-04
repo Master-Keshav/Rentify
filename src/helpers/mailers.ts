@@ -34,6 +34,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
         }
 
         const mailresponse = await transport.sendMail(mailOptions);
+        console.log("Mail Response: ", mailresponse);
         return mailresponse;
 
     } catch (error: any) {
