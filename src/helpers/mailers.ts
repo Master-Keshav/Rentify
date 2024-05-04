@@ -33,9 +33,6 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
             </p>`
         }
 
-        console.log(process.env.TRANSPORT_USER, process.env.TRANSPORT_PASS)
-        console.log(mailOptions)
-
         const mailresponse = await transport.sendMail(mailOptions);
         console.log("Mail Response: ", mailresponse);
         return mailresponse;
