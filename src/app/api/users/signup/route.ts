@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
         const user = await User.findOne({ email })
         
         if (user) {
-            return NextResponse.json({ error: "User already exists" }, { status: 400 })
+            return NextResponse.json({ message: "User already exists" }, { status: 400 })
         }
         
         //hash password
@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
         })
 
     } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 })
+        return NextResponse.json({ message: error.message }, { status: 500 })
 
     }
 }

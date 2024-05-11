@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import Link from "next/link";
+import LoaderModal from "../components/Loader/LoaderModal";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -16,6 +17,12 @@ const LoginPage = () => {
     });
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            onLogin();
+        }
+    }
 
     const onLogin = async () => {
         try {
@@ -44,6 +51,7 @@ const LoginPage = () => {
     return (
         <>
             <div className="background-container">
+                {loading ? <LoaderModal isOpen={loading} /> : <></>}
                 <div className="wrapper">
                     <h1>Login</h1>
                     <div className="input-box">
@@ -61,6 +69,7 @@ const LoginPage = () => {
                             type="password"
                             value={user.password}
                             onChange={(e) => setUser({ ...user, password: e.target.value })}
+                            onKeyDown={handleKeyPress}
                             placeholder="Password"
                         />
                     </div>
