@@ -1,11 +1,14 @@
+import Hero from "./container/hero/hero";
 import Image from "next/image";
-import Header from "./components/header/header";
+import Navbar from "./components/navbar/navbar";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Header></Header>
+      <Navbar></Navbar>
+      <Hero></Hero>
+      {/* <Footer></Footer> */}
     </main>
   );
 }

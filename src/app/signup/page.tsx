@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import Link from "next/link";
-import LoaderModal from "../components/Loader/LoaderModal";
+import LoaderModal from "../components/loader/LoaderModal";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
