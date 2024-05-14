@@ -1,5 +1,5 @@
 .header {
-    position: fixed;
+    // position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -57,11 +57,11 @@
                 border-radius: 50%;
                 overflow: hidden;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-            }
 
-            .profile-pic img {
-                width: 100%;
-                height: auto;
+                img {
+                    width: 100%;
+                    height: auto;
+                }
             }
 
             .dropdownmenu {
@@ -76,7 +76,7 @@
                         margin: 0;
                         float: left;
                         position: relative;
-                        width: 12rem;
+                        width: 9rem;
 
                         &:hover {
                             .link {
@@ -92,7 +92,11 @@
                                 top: 55px;
                                 visibility: visible;
                             }
+                        }
 
+                        .menu {
+                            border-top-left-radius: 1rem;
+                            border-top-right-radius: 1rem;
                         }
 
                         .link {
@@ -100,7 +104,7 @@
                             color: white;
                             display: block;
                             font-weight: 500;
-                            font-size: 1rem;
+                            font-size: 1.2rem;
                             padding: 1rem;
                             text-align: center;
                             text-decoration: none;
@@ -121,9 +125,7 @@
                                 .link {
                                     // background-color: #34495e;
                                     background-color: #343F57;
-                                }
 
-                                .link {
                                     &:hover {
                                         background-color: #6E9EBF;
                                     }
@@ -141,9 +143,10 @@
             color: #fff;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.2rem;
             padding: 1.16rem 2rem;
             transition: background-color 0.3s;
+            border-radius: 1rem;
 
             &:hover {
                 background-color: #df4b05;

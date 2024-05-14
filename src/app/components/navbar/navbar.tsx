@@ -97,7 +97,7 @@ const Navbar: any = () => {
                     <nav className="dropdownmenu">
                         <ul>
                             <li>
-                                <Link className="link" href='/'>Hi, Keshav</Link>
+                                <Link className="link menu" href='/'>Hi, Keshav</Link>
                                 <ul id="submenu">
                                     {navProfileLink.map((item, idx) => (
                                         <li key={idx}>
