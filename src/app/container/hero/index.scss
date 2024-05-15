@@ -18,7 +18,7 @@
             width: 30vw;
         }
 
-        div {
+        .text {
             font-size: 1.2rem;
             width: 40rem;
             background-color: rgb(174, 208, 225, 0.8);
@@ -26,6 +26,35 @@
             color: #333E55;
             font-weight: 500;
             border-radius: 1rem;
+        }
+
+        .btns {
+            display: flex;
+            text-align: center;
+            gap: 2rem;
+            padding: 1rem;
+
+            .btn {
+                margin: 1rem;
+                padding: 1rem;
+                border-radius: 20%;
+                font-size: 1.3rem;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .explore {
+                border: none;
+                background-color: #4AA9BC;
+                color: #fff;
+                border: 2px solid #4AA9BC;
+            }
+
+            .about {
+                background-color: transparent;
+                color: #333E55;
+                border: 2px solid #333E55;
+            }
         }
     }
 

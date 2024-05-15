@@ -3,6 +3,7 @@
 import React from 'react';
 import Carousel from '@/app/components/carousel/carousel';
 import './index.scss'
+import { useRouter } from 'next/navigation';
 
 const slides = [
     {
@@ -20,11 +21,23 @@ const slides = [
 ];
 
 const Hero = () => {
+    const router = useRouter();
+    const onExploreClick = (() => {
+        router.push("/properties");
+    })
+
+    const onAboutClick = (() => {
+        router.push("/about");
+    })
     return (
         <div className='hero'>
             <div className="hero-text">
                 <h1>Find Your Perfect Home</h1>
-                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum odit alias incidunt! Non sit eius libero repudiandae, labore deserunt beatae odio at rerum, a error facere cumque quo magnam. Voluptates.</div>
+                <div className='text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum odit alias incidunt! Non sit eius libero repudiandae, labore deserunt beatae odio at rerum, a error facere cumque quo magnam. Voluptates.</div>
+                <div className="btns">
+                    <button onClick={onExploreClick} className="btn explore">Explore</button>
+                    <button onClick={onAboutClick} className="btn about">About Us</button>
+                </div>
             </div>
             <div className="carousel">
                 <Carousel slides={slides} />
