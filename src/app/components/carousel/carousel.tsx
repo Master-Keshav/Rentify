@@ -1,9 +1,8 @@
-'use client'
-
-import React, { useState } from 'react';
-import styles from './Carousel.module.scss';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
+
+import styles from './Carousel.module.scss';
 
 const Carousel = ({ slides }: any) => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -19,6 +18,12 @@ const Carousel = ({ slides }: any) => {
     const goToSlide = (slideIndex: number) => {
         setCurrentSlide(slideIndex);
     };
+
+    useEffect(() => {
+        const interval = setInterval(goToNextSlide, 3000);
+        return () => clearInterval(interval);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentSlide]);
 
     return (
         <div className={styles.carousel}>
@@ -39,7 +44,7 @@ const Carousel = ({ slides }: any) => {
                 {slides.map((slide: any, index: number) => (
                     <span
                         key={index}
-                        className={`${styles.dot} ${index === currentSlide ? styles.active : ''}`}
+                        className={`${styles.dot} ${index === currentSlide ? '' : styles.active}`}
                         onClick={() => goToSlide(index)}
                     />
                 ))}

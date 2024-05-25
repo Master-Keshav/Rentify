@@ -1,0 +1,66 @@
+.filters {
+    padding: 0.5rem 3rem;
+    width: fit-content;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    .filterGroup {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+
+        button {
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            color: #333E55;
+            border: 2px solid #333E55;
+            border-left: none;
+            cursor: pointer;
+            position: relative;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1rem;
+
+            &:first-of-type {
+                border-left: 2px solid #333E55;
+                border-radius: 5px 0 0 5px;
+                cursor: auto;
+            }
+
+            &:last-of-type {
+                border-radius: 0 5px 5px 0;
+            }
+
+            &:hover:not(:disabled) {
+                color: #0056b3;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 50%;
+                    bottom: 5px;
+                    transform: translateX(-50%);
+                    width: 80%;
+                    height: 2px;
+                    background-color: #0056b3;
+                }
+            }
+
+            &.active {
+                color: #0056b3;
+            }
+
+            .icon {
+                margin-right: 8px;
+                font-size: 14px;
+                position: relative;
+                top: 1px;
+            }
+        }
+    }
+}
