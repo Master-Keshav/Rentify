@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 import Filter from '../components/filter/filter';
 import Navbar from '../components/navbar/navbar';
@@ -35,7 +36,9 @@ const Properties = () => {
                 </div>
                 <div className={`properties-list ${view === 'List' ? 'list-view' : ''}`}>
                     {filteredProperties.map(property => (
-                        <PropertyCard key={property.id} property={property} />
+                        <Link href={`/properties/${property.id}`} key={property.id} passHref>
+                            <PropertyCard property={property} />
+                        </Link>
                     ))}
                 </div>
             </div>
