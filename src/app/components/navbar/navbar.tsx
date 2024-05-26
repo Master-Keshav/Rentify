@@ -1,13 +1,15 @@
 'use client'
 
-import React, { useState } from "react";
-import Link from "next/link";
+import axios from "axios";
 import Image from "next/image";
-import './index.scss'
+import Link from "next/link";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import axios from "axios";
-import LoaderModal from "@/app/components/loader/LoaderModal";
+
+import LoaderModal from "@/app/components/loader/loaderModal";
+
+import './index.scss'
 
 const navLink = [
     {

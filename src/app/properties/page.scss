@@ -12,7 +12,6 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -32,19 +31,18 @@ body {
         z-index: -1;
     }
 
-    .filter {
-        display: flex;
-        justify-content: center;
-        margin: 1.5rem;
-    }
-
-
     .page-list-container {
         flex: 1;
-        padding: 20px;
+        margin: 0 20rem 2rem;
         position: relative;
         z-index: 1;
         color: #333E55;
+
+        .filter {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem;
+        }
 
         .properties-list {
             display: grid;

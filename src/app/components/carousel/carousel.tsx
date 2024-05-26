@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
 
-import styles from './Carousel.module.scss';
+import './index.scss';
 
 const Carousel = ({ slides }: any) => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -26,8 +26,8 @@ const Carousel = ({ slides }: any) => {
     }, [currentSlide]);
 
     return (
-        <div className={styles.carousel}>
-            <div className={styles.imageContainer}>
+        <div className={"carousel"}>
+            <div className={"imageContainer"}>
                 <Image
                     src={slides[currentSlide].image}
                     alt={`Slide ${currentSlide}`}
@@ -35,16 +35,16 @@ const Carousel = ({ slides }: any) => {
                     height={700}
                 />
             </div>
-            <div className={styles.overlay}>
+            <div className={"overlay"}>
                 <h3>{slides[currentSlide].text}</h3>
             </div>
-            <button onClick={goToPrevSlide} className={styles.prevBtn}><FaArrowLeft /></button>
-            <button onClick={goToNextSlide} className={styles.nextBtn}><FaArrowRight /></button>
-            <div className={styles.dots}>
+            <button onClick={goToPrevSlide} className={"prevBtn"}><FaArrowLeft /></button>
+            <button onClick={goToNextSlide} className={"nextBtn"}><FaArrowRight /></button>
+            <div className={"dots"}>
                 {slides.map((slide: any, index: number) => (
                     <span
                         key={index}
-                        className={`${styles.dot} ${index === currentSlide ? '' : styles.active}`}
+                        className={`${"dot"} ${index === currentSlide ? '' : "active"}`}
                         onClick={() => goToSlide(index)}
                     />
                 ))}

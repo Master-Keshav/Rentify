@@ -7,7 +7,8 @@ import Navbar from '../components/navbar/navbar';
 import PropertyCard from '../components/propertyCard/propertyCard';
 import { properties } from '../constants/properties';
 
-import './styles.scss';
+import './page.scss';
+import Footer from '../components/footer/footer';
 
 const Properties = () => {
     const [filteredType, setFilteredType] = useState('All');
@@ -38,6 +39,7 @@ const Properties = () => {
                     ))}
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

@@ -5,7 +5,9 @@ export const properties = [
         rating: 4.5,
         totalRatings: 34,
         houseType: 'Apartment',
-        location: 'New York, NY'
+        location: 'New York, NY',
+        tag: 'featured',
+        price: 3500
     },
     {
         id: 2,
@@ -13,7 +15,9 @@ export const properties = [
         rating: 4.7,
         totalRatings: 58,
         houseType: 'House',
-        location: 'Los Angeles, CA'
+        location: 'Los Angeles, CA',
+        tag: 'urgent',
+        price: 5000
     },
     {
         id: 3,
@@ -21,7 +25,9 @@ export const properties = [
         rating: 4.2,
         totalRatings: 19,
         houseType: 'Condo',
-        location: 'Chicago, IL'
+        location: 'Chicago, IL',
+        tag: 'featured',
+        price: 2800
     },
     {
         id: 4,
@@ -29,7 +35,9 @@ export const properties = [
         rating: 4.8,
         totalRatings: 112,
         houseType: 'Villa',
-        location: 'Miami, FL'
+        location: 'Miami, FL',
+        tag: 'urgent',
+        price: 7000
     },
     {
         id: 5,
@@ -37,7 +45,9 @@ export const properties = [
         rating: 4.3,
         totalRatings: 76,
         houseType: 'Apartment',
-        location: 'San Francisco, CA'
+        location: 'San Francisco, CA',
+        tag: 'featured',
+        price: 3800
     },
     {
         id: 6,
@@ -45,7 +55,9 @@ export const properties = [
         rating: 4.1,
         totalRatings: 43,
         houseType: 'House',
-        location: 'Seattle, WA'
+        location: 'Seattle, WA',
+        tag: 'urgent',
+        price: 4200
     },
     {
         id: 7,
@@ -53,7 +65,9 @@ export const properties = [
         rating: 4.9,
         totalRatings: 85,
         houseType: 'Cottage',
-        location: 'Austin, TX'
+        location: 'Austin, TX',
+        tag: 'featured',
+        price: 3100
     },
     {
         id: 8,
@@ -61,7 +75,9 @@ export const properties = [
         rating: 4.6,
         totalRatings: 92,
         houseType: 'Penthouse',
-        location: 'Las Vegas, NV'
+        location: 'Las Vegas, NV',
+        tag: 'urgent',
+        price: 8000
     },
     {
         id: 9,
@@ -69,7 +85,9 @@ export const properties = [
         rating: 4.0,
         totalRatings: 21,
         houseType: 'Townhouse',
-        location: 'Portland, OR'
+        location: 'Portland, OR',
+        tag: 'featured',
+        price: 2900
     },
     {
         id: 10,
@@ -77,7 +95,9 @@ export const properties = [
         rating: 4.4,
         totalRatings: 64,
         houseType: 'Apartment',
-        location: 'Boston, MA'
+        location: 'Boston, MA',
+        tag: 'urgent',
+        price: 3600
     },
     {
         id: 11,
@@ -85,7 +105,9 @@ export const properties = [
         rating: 4.3,
         totalRatings: 38,
         houseType: 'Loft',
-        location: 'Denver, CO'
+        location: 'Denver, CO',
+        tag: 'featured',
+        price: 2700
     },
     {
         id: 12,
@@ -93,6 +115,8 @@ export const properties = [
         rating: 4.5,
         totalRatings: 53,
         houseType: 'Mansion',
-        location: 'Atlanta, GA'
+        location: 'Atlanta, GA',
+        tag: 'urgent',
+        price: 9000
     }
 ];

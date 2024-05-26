@@ -1,0 +1,5 @@
+MONGO_URI=mongodb+srv://admin:admin@rentify.sdgaerd.mongodb.net/rentify?retryWrites=true&w=majority
+TOKEN_SECRET=keshavvyas484
+DOMAIN=http://localhost:3000
+TRANSPORT_USER=a86e30945827c7
+TRANSPORT_PASS=83b8c78adf0271

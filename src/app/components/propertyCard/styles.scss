@@ -1,0 +1,71 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    background: #fff;
+
+    .imageContainer {
+        position: relative;
+
+        .image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .heartIcon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+        }
+    }
+
+    .details {
+        padding: 10px;
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            .rating {
+                font-size: 14px;
+            }
+
+            .tag {
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-size: 12px;
+                font-weight: bold;
+                text-transform: uppercase;
+
+                &.featured {
+                    background-color: green;
+                    color: white;
+                }
+
+                &.urgent {
+                    background-color: orange;
+                    color: white;
+                }
+            }
+
+            .price {
+                font-size: 16px;
+                font-weight: bold;
+                color: #333;
+            }
+        }
+    }
+}
