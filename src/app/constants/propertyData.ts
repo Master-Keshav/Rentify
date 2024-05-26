@@ -3,6 +3,7 @@ export interface PropertyData {
     title: string;
     about: string;
     amenities: string[];
+    tags: string[],
     owner: OwnerDetails;
     prices: number;
     location: string;
@@ -30,10 +31,15 @@ const propertyData: PropertyData = {
     amenities: [
         "Swimming Pool",
         "Gym",
-        "Spa",
+        "Kitchen",
+        "Wifi",
         "Home Theater",
+        "Parking",
+        "Patio or balcony",
+        "Pets Allowed",
+        "Garden",
+        "TV",
         "Smart Home Technology",
-        "Landscaped Garden",
         "24/7 Security"
     ],
     owner: {
@@ -41,6 +47,11 @@ const propertyData: PropertyData = {
         about: "Real estate entrepreneur with over 10 years of experience.",
         contact: "johndoe@example.com | +1234567890"
     },
+    tags: [
+        "2 Bedrooms",
+        "4 Beds",
+        "2 Washrooms",
+    ],
     prices: 5000,
     location: "Banglore, India",
     area: 5000,
@@ -49,3 +60,6 @@ const propertyData: PropertyData = {
 };
 
 export default propertyData;
+
+
+import { TbToolsKitchen3 } from 'react-icons/tb';
