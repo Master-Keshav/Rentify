@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-
 import { motion } from 'framer-motion';
-import { FaSwimmingPool, FaDumbbell, FaWifi, FaTv, FaParking, FaPaw, FaTree, FaShieldAlt, FaHouseUser } from 'react-icons/fa';
+import { FaSwimmingPool, FaDumbbell, FaWifi, FaTv, FaParking, FaPaw, FaTree, FaShieldAlt, FaHouseUser, FaStar } from 'react-icons/fa';
 import { GiSmartphone } from 'react-icons/gi';
 import { TbToolsKitchen3 } from 'react-icons/tb';
 
@@ -14,6 +13,8 @@ import propertyData from '@/app/constants/propertyData';
 import './page.scss';
 
 const Property = ({ params }: any) => {
+    const [showReviewInput, setShowReviewInput] = useState(false);
+
     const amenityIcons: any = {
         "Swimming Pool": <FaSwimmingPool className="icon" />,
         "Gym": <FaDumbbell className="icon" />,
@@ -37,9 +38,13 @@ const Property = ({ params }: any) => {
     const hrAnimation = {
         hidden: { width: 0 },
         visible: {
-            width: "100%",
+            width: "70%",
             transition: { duration: 1, ease: "easeInOut" }
         }
+    };
+
+    const handleReviewButtonClick = () => {
+        setShowReviewInput(!showReviewInput);
     };
 
     return (
@@ -85,15 +90,41 @@ const Property = ({ params }: any) => {
                             <h3>What this place offers</h3>
                             <div className="amenities">
                                 {propertyData.amenities.map((amenity: string, index: number) => (
-                                    <div key={index} className="amenity hover-effect">
+                                    <motion.div
+                                        key={index}
+                                        className="amenity hover-effect"
+                                        whileHover={hoverEffect}
+                                    >
                                         {amenityIcons[amenity]} {amenity}
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
                         </div>
                     </div>
                     <div className="property-desc-right">
-                        {/* Right part will go here */}
+                        <div className="price-review">
+                            <div className="price">
+                                ${propertyData.price}<span className="currency"> / Month</span>
+                            </div>
+                            <div className="total-reviews">
+                                {propertyData.totalReviews} reviews
+                            </div>
+                        </div>
+                        <div className="rating">
+                            <div className="stars">
+                                {[...Array(5)].map((_, index) => (
+                                    <FaStar key={index} color={index < Math.round(propertyData.averageReviews) ? 'gold' : 'gray'} />
+                                ))}
+                            </div>
+                            <button className="review-button" onClick={handleReviewButtonClick}>
+                                Write a review
+                            </button>
+                            {showReviewInput && (
+                                <div className="review-input">
+                                    <input type="number" min="1" max="5" placeholder="Give star rating" />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

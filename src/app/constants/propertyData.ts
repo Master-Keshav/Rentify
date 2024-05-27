@@ -5,7 +5,9 @@ export interface PropertyData {
     amenities: string[];
     tags: string[],
     owner: OwnerDetails;
-    prices: number;
+    price: number;
+    totalReviews: number;
+    averageReviews: number;
     location: string;
     area: number;
     builtYear: number;
@@ -52,7 +54,9 @@ const propertyData: PropertyData = {
         "4 Beds",
         "2 Washrooms",
     ],
-    prices: 5000,
+    price: 5000,
+    totalReviews: 2,
+    averageReviews: 4.3,
     location: "Banglore, India",
     area: 5000,
     builtYear: 2020,
@@ -60,6 +64,3 @@ const propertyData: PropertyData = {
 };
 
 export default propertyData;
-
-
-import { TbToolsKitchen3 } from 'react-icons/tb';

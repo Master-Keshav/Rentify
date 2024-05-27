@@ -83,11 +83,11 @@
         }
 
         .property-desc {
-            padding: 1rem;
+            padding: 1rem 2rem;
             display: flex;
 
             .property-desc-left {
-                flex: 1;
+                flex: 3;
 
                 .title {
                     font-size: 2rem;
@@ -106,8 +106,9 @@
                     }
                 }
 
-                hr {
+                .animated-hr {
                     margin: 1rem 0;
+                    border: 1px solid #E37430;
                 }
 
                 .about {
@@ -137,14 +138,75 @@
                                 }
                             }
                         }
-
                     }
                 }
             }
 
             .property-desc-right {
-                flex: 1;
-                // Add styles for the right part here
+                flex: 2;
+                display: flex;
+                flex-direction: column;
+                gap: 1.2rem;
+
+                .price-review {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: end;
+
+                    .price {
+                        font-size: 3rem;
+                        font-weight: bold;
+
+                        .currency {
+                            font-size: 0.5rem;
+                            font-weight: normal;
+                        }
+                    }
+
+                    .total-reviews {
+                        font-size: 1.2rem;
+                        padding-bottom: 1rem;
+                    }
+                }
+
+                .rating {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 1.5rem;
+
+                    .stars {
+                        font-size: 1.5em;
+                        display: flex;
+                        gap: 5px;
+                    }
+
+                    .review-button {
+                        width: 50%;
+                        background-color: #396AFD;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-size: 1.5rem;
+                        font-weight: bold;
+
+                        &:hover {
+                            background-color: #2048bf;
+                        }
+                    }
+
+                    .review-input {
+                        margin-top: 0.5rem;
+
+                        input {
+                            padding: 5px;
+                            border-radius: 5px;
+                            border: 1px solid #ccc;
+                        }
+                    }
+                }
             }
         }
     }
