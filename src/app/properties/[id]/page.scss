@@ -197,13 +197,96 @@
                         }
                     }
 
-                    .review-input {
-                        margin-top: 0.5rem;
+                    .review-form {
+                        width: 50%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
 
-                        input {
-                            padding: 5px;
+                        textarea {
+                            width: 100%;
+                            padding: 6px;
                             border-radius: 5px;
-                            border: 1px solid #ccc;
+                            border: 1px solid #396AFD;
+                            background-color: #F5F5F5;
+                            color: #343F57;
+                            resize: none;
+                            font-size: 1rem;
+
+                            &:focus {
+                                border-color: #9ab3fc;
+                                outline: none;
+                            }
+                        }
+
+                        .review-buttons {
+                            display: flex;
+                            justify-content: space-between;
+                            width: 100%;
+                            margin-top: 10px;
+
+                            .cancel-button,
+                            .ok-button {
+                                width: 48%;
+                                padding: 10px;
+                                border-radius: 5px;
+                                border: none;
+                                cursor: pointer;
+                                font-size: 1rem;
+                                font-weight: bold;
+                            }
+
+                            .cancel-button {
+                                background-color: #FF4D4D;
+                                color: white;
+
+                                &:hover {
+                                    background-color: #D43A3A;
+                                }
+                            }
+
+                            .ok-button {
+                                background-color: #4CAF50;
+                                color: white;
+
+                                &:hover {
+                                    background-color: #3A923A;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .owner-details {
+                    display: flex;
+                    gap: 1rem;
+                    margin-top: 2rem;
+
+                    .owner-photo {
+                        .owner-photo-img {
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+                    }
+
+                    .owner-info {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+
+                        .owner-name {
+                            font-size: 1.2rem;
+                            font-weight: bold;
+                        }
+
+                        .owner-about {
+                            font-size: 1rem;
+                            color: #666;
+                        }
+
+                        .owner-contact {
+                            font-size: 0.9rem;
+                            color: #999;
                         }
                     }
                 }

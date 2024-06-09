@@ -14,6 +14,10 @@ import './page.scss';
 
 const Property = ({ params }: any) => {
     const [showReviewInput, setShowReviewInput] = useState(false);
+    const [hoveredRating, setHoveredRating] = useState<number | null>(null);
+    const [selectedRating, setSelectedRating] = useState<number>(Math.round(propertyData.averageReviews));
+    const [reviewText, setReviewText] = useState<string>('');
+
 
     const amenityIcons: any = {
         "Swimming Pool": <FaSwimmingPool className="icon" />,
@@ -46,6 +50,38 @@ const Property = ({ params }: any) => {
     const handleReviewButtonClick = () => {
         setShowReviewInput(!showReviewInput);
     };
+
+    const getStarColor = (index: number) => {
+        if (hoveredRating !== null) {
+            return index < hoveredRating ? 'gold' : 'gray';
+        }
+        return index < selectedRating ? 'gold' : 'gray';
+    };
+
+
+    const handleStarClick = (index: number) => {
+        const newRating = index + 1;
+        setSelectedRating(newRating);
+        console.log(newRating);
+    };
+
+    const handleStarHover = (index: number) => {
+        setHoveredRating(index + 1);
+    };
+
+    const handleStarMouseLeave = () => {
+        setHoveredRating(null);
+    };
+
+    const handleCancelClick = () => {
+        setShowReviewInput(false);
+    };
+
+    const handleOkClick = () => {
+        console.log('Review submitted:', reviewText, selectedRating);
+        setShowReviewInput(false);
+    };
+
 
     return (
         <div className='container'>
@@ -113,17 +149,47 @@ const Property = ({ params }: any) => {
                         <div className="rating">
                             <div className="stars">
                                 {[...Array(5)].map((_, index) => (
-                                    <FaStar key={index} color={index < Math.round(propertyData.averageReviews) ? 'gold' : 'gray'} />
+                                    <FaStar
+                                        key={index}
+                                        color={getStarColor(index)}
+                                        onMouseEnter={() => handleStarHover(index)}
+                                        onMouseLeave={handleStarMouseLeave}
+                                        onClick={() => handleStarClick(index)}
+                                    />
                                 ))}
                             </div>
-                            <button className="review-button" onClick={handleReviewButtonClick}>
-                                Write a review
-                            </button>
-                            {showReviewInput && (
-                                <div className="review-input">
-                                    <input type="number" min="1" max="5" placeholder="Give star rating" />
+                            {showReviewInput ? (
+                                <div className="review-form">
+                                    <textarea
+                                        value={reviewText}
+                                        onChange={(e) => setReviewText(e.target.value)}
+                                        placeholder="Write your review here..."
+                                    />
+                                    <div className="review-buttons">
+                                        <button className="cancel-button" onClick={handleCancelClick}>
+                                            Cancel
+                                        </button>
+                                        <button className="ok-button" onClick={handleOkClick}>
+                                            Ok
+                                        </button>
+                                    </div>
                                 </div>
+                            ) : (
+                                <button className="review-button" onClick={handleReviewButtonClick}>
+                                    Write a review
+                                </button>
                             )}
+                        </div>
+
+                        <div className="owner-details">
+                            <div className="owner-photo">
+                                <Image src={propertyData.owner.profilePhoto} alt="Owner" width={100} height={100} className="owner-photo-img" />
+                            </div>
+                            <div className="owner-info">
+                                <div className="owner-name">{propertyData.owner.name}</div>
+                                <div className="owner-about">{propertyData.owner.about}</div>
+                                <div className="owner-contact">{propertyData.owner.contact}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
