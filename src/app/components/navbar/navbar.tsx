@@ -21,8 +21,8 @@ const navLink = [
         "link": '/properties'
     },
     {
-        "name": "FAQs",
-        "link": '/faq'
+        "name": "Agents",
+        "link": '/agents'
     },
     {
         "name": "About Us",

@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    properties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }],
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,

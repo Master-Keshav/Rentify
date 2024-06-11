@@ -1,7 +1,8 @@
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { FiGrid, FiList } from 'react-icons/fi';
-import { MdDensityMedium } from 'react-icons/md';
+import { MdDensityMedium, MdOutlineAddchart } from 'react-icons/md';
 import { TbUrgent } from 'react-icons/tb';
 
 import './index.scss';
@@ -46,6 +47,8 @@ const showFilter = [
 ]
 
 const Filter: React.FC<FilterProps> = ({ onTypeChange, onViewChange }) => {
+    const router = useRouter()
+
     const [selectedType, setSelectedType] = useState('All');
     const [selectedView, setSelectedView] = useState('Grid');
 
@@ -59,36 +62,51 @@ const Filter: React.FC<FilterProps> = ({ onTypeChange, onViewChange }) => {
         onViewChange(view);
     };
 
+    const onCreateClick = (() => {
+        router.push("/properties/create");
+    })
+
     return (
-        <div className="filters">
-            <div className="filterGroup">
-                {typeFilter.map((filter, idx) => (
-                    <button
-                        key={idx}
-                        className={selectedType === filter.name ? 'active' : ''}
-                        onClick={() => handleTypeChange(filter.name)}
-                        disabled={idx === 0}
-                    >
-                        {filter.icon && <span className='icon'>{filter.icon}</span>}
-                        <span className='name'>{filter.name}</span>
-                    </button>
-                ))}
+        <>
+            <div className="filters">
+                <div className="filterGroup">
+                    {typeFilter.map((filter, idx) => (
+                        <button
+                            key={idx}
+                            className={selectedType === filter.name ? 'active' : ''}
+                            onClick={() => handleTypeChange(filter.name)}
+                            disabled={idx === 0}
+                        >
+                            {filter.icon && <span className='icon'>{filter.icon}</span>}
+                            <span className='name'>{filter.name}</span>
+                        </button>
+                    ))}
+                </div>
+                <div className="filterGroup">
+                    {showFilter.map((filter, idx) => (
+                        <button
+                            key={idx}
+                            className={selectedView === (idx === 1 ? 'Grid' : 'List') ? 'active' : ''}
+                            onClick={() => handleViewChange(idx === 1 ? 'Grid' : 'List')}
+                            disabled={idx === 0}
+                        >
+                            {filter.icon && <span className='icon'>{filter.icon}</span>}
+                            <span className='name'>{filter.name}</span>
+
+                        </button>
+                    ))}
+                </div>
             </div>
-            <div className="filterGroup">
-                {showFilter.map((filter, idx) => (
-                    <button
-                        key={idx}
-                        className={selectedView === (idx === 1 ? 'Grid' : 'List') ? 'active' : ''}
-                        onClick={() => handleViewChange(idx === 1 ? 'Grid' : 'List')}
-                        disabled={idx === 0}
-                    >
-                        {filter.icon && <span className='icon'>{filter.icon}</span>}
-                        <span className='name'>{filter.name}</span>
+            <div className="filters">
+                <div className="filterGroup">
+                    <button onClick={onCreateClick} >
+                        <span className='icon-lg'><MdOutlineAddchart /></span>
+                        <span className='name'>Create Property</span>
 
                     </button>
-                ))}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
