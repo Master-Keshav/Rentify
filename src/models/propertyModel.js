@@ -24,8 +24,13 @@ const propertySchema = new mongoose.Schema({
         required: true,
         default: [],
     },
-    tags: {
-        type: [String],
+    houseType: {
+        type: String,
+        required: true,
+        default: [],
+    },
+    tag: {
+        type: String,
         required: true,
         default: [],
     },
@@ -38,7 +43,7 @@ const propertySchema = new mongoose.Schema({
         type: Number,
         required: [true, "Please provide a price"],
     },
-    totalReviews: {
+    reviews: {
         type: [{
             user: {
                 type: mongoose.Schema.Types.ObjectId,
@@ -46,21 +51,26 @@ const propertySchema = new mongoose.Schema({
                 required: true
             },
             review: {
-                type: String,
+                type: Number,
                 required: true
             }
         }],
-        default: [],
+        default: function () {
+            return [{
+                user: this.owner,
+                review: 5
+            }];
+        }
     },
     averageReviews: {
         type: Number,
-        default: 0,
+        default: 5,
         get: function () {
-            if (this.totalReviews.length === 0) {
-                return 4;
+            if (this.reviews.length === 0) {
+                return 5;
             } else {
-                const sumOfReviews = this.totalReviews.reduce((acc, review) => acc + review.review, 0);
-                return sumOfReviews / this.totalReviews.length;
+                const sumOfReviews = this.reviews.reduce((acc, review) => acc + review.review, 0);
+                return sumOfReviews / this.reviews.length;
             }
         }
     },

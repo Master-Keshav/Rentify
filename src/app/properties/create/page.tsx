@@ -137,6 +137,23 @@ const CreateProperty = () => {
                             <label>Price:</label>
                             <input type="number" name="price" value={formData.price} onChange={handleChange} placeholder="Enter property price" required />
                         </div>
+
+                        <div className="form-input houseType">
+                            <label>House Type:</label>
+                            <select name="houseType" onChange={handleChange} required>
+                                <option value="">Select House Type</option>
+                                <option value="House">House</option>
+                                <option value="Apartment">Apartment</option>
+                                <option value="Villa">Villa</option>
+                                <option value="Cottage">Cottage</option>
+                                <option value="Penthouse">Penthouse</option>
+                                <option value="Townhouse">Townhouse</option>
+                                <option value="Loft">Loft</option>
+                                <option value="Discounted">Discounted</option>
+                                <option value="Mansion">Mansion</option>
+                                <option value="Condo">Condo</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div className="form-input about">
@@ -208,8 +225,8 @@ const CreateProperty = () => {
                             <input type="file" name="images" onChange={handleChange} multiple required />
                         </div>
                         <div className="form-input tags">
-                            <label>Tags:</label>
-                            <select name="tags" onChange={handleChange} required>
+                            <label>Tag:</label>
+                            <select name="tag" onChange={handleChange} required>
                                 <option value="">Select Tag</option>
                                 <option value="urgent">Urgent</option>
                                 <option value="featured">Featured</option>

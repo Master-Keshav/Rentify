@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 
+import { truncateText } from '@/utils/textUtils';
+
 import './styles.scss';
 
 const PropertyCard = ({ property }: any) => {
@@ -12,11 +14,11 @@ const PropertyCard = ({ property }: any) => {
             </div>
             <div className={"details"}>
                 <div className={"row"}>
-                    <div className={"rating"}>⭐ {property.rating} ({property.totalRatings})</div>
+                    <div className={"rating"}>⭐ {property.averageReviews} ({property.totalReviews})</div>
                     <div className={`tag ${property.tag}`}>{property.tag}</div>
                 </div>
                 <div className={"row"}>
-                    <div className={"house-type"}> {property.houseType} in {property.location} </div>
+                    <div className={"house-type"}> {truncateText(`${property.houseType} in ${property.location}`, 29)}  </div>
                     <div className={"price"}>${property.price}</div>
                 </div>
             </div>
