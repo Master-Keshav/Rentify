@@ -1,0 +1,61 @@
+.agent-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(40px);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    color: black;
+    cursor: pointer;
+
+    .agent-photo {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 5rem;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .agent-info {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .agent-name {
+        h1 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .verified-icon {
+                margin-left: 1rem;
+                color: #E37430;
+                background-color: white;
+                border-radius: 60%;
+                font-size: 24px;
+            }
+        }
+    }
+
+    .agent-details {
+        justify-content: space-between;
+        flex-grow: 1;
+        padding: 0 10px;
+        border-radius: 8px;
+
+        p {
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+    }
+}
