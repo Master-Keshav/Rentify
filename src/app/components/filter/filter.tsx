@@ -5,11 +5,24 @@ import { FiGrid, FiList } from 'react-icons/fi';
 import { MdDensityMedium, MdOutlineAddchart } from 'react-icons/md';
 import { TbUrgent } from 'react-icons/tb';
 
+import AgentDetailsModal from '../modal/AgentDetailsModal';
+
 import './index.scss';
+
+interface UserDetailsInterface {
+    username?: string;
+    name?: string;
+    email?: string;
+    phonenumber?: string | number;
+    experience?: string | number;
+    about?: string;
+    imageUrl?: string;
+}
 
 interface FilterProps {
     onTypeChange: (type: string) => void;
     onViewChange: (view: string) => void;
+    userDetails: UserDetailsInterface
 }
 
 const typeFilter = [
@@ -46,11 +59,12 @@ const showFilter = [
     },
 ]
 
-const Filter: React.FC<FilterProps> = ({ onTypeChange, onViewChange }) => {
+const Filter: React.FC<FilterProps> = ({ onTypeChange, onViewChange, userDetails }) => {
     const router = useRouter()
 
     const [selectedType, setSelectedType] = useState('All');
     const [selectedView, setSelectedView] = useState('Grid');
+    const [modalOpen, setModalOpen] = useState(false);
 
     const handleTypeChange = (type: string) => {
         setSelectedType(type);
@@ -62,9 +76,17 @@ const Filter: React.FC<FilterProps> = ({ onTypeChange, onViewChange }) => {
         onViewChange(view);
     };
 
-    const onCreateClick = (() => {
-        router.push("/properties/create");
-    })
+    const onCreateClick = () => {
+        if (userDetails && Object.values(userDetails).some(field => field === null || field === '')) {
+            setModalOpen(true);
+        } else {
+            router.push("/properties/create");
+        }
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
 
     return (
         <>
@@ -106,6 +128,14 @@ const Filter: React.FC<FilterProps> = ({ onTypeChange, onViewChange }) => {
                     </button>
                 </div>
             </div>
+            {
+                modalOpen &&
+                <AgentDetailsModal
+                    isOpen={modalOpen}
+                    onClose={closeModal}
+                    userDetails={userDetails}
+                />
+            }
         </>
     );
 };

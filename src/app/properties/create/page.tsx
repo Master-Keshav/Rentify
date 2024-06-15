@@ -113,7 +113,7 @@ const CreateProperty = () => {
             router.push("/properties");
         } catch (error: any) {
             console.error("Error creating property:", error.message);
-            toast.error("Failed to create property");
+            toast.error(error?.response?.data?.message || "Failed to create property");
         } finally {
             setLoading(false);
         }

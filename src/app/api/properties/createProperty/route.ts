@@ -41,6 +41,9 @@ export async function POST(request: NextRequest) {
 
         await newProperty.save();
 
+        user.properties.push(newProperty._id);
+        await user.save();
+
         console.log("Property created successfully:", newProperty);
 
         return NextResponse.json({
@@ -49,7 +52,20 @@ export async function POST(request: NextRequest) {
             newProperty
         }, { status: 201 });
     } catch (error: any) {
-        console.error("Error creating property:", error.message);
-        return NextResponse.json({ message: error.message }, { status: 500 });
+        console.error("Error creating property:", error);
+
+        let errorMessage = "Failed to create property";
+        if (error.errors) {
+            const errorMessages: string[] = [];
+            for (const key in error.errors) {
+                if (error.errors[key].message) {
+                    errorMessages.push(error.errors[key].message);
+                }
+            }
+            errorMessage = errorMessages.join(", ");
+        }
+
+        return NextResponse.json({ message: errorMessage }, { status: 500 });
     }
+
 }

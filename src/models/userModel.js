@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: [true, "Please provide a email"],
+        required: [true, "Please provide an email"],
         unique: true,
     },
     password: {
@@ -23,12 +23,32 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    name: {
+        type: String,
+        default: null,
+    },
+    imageUrl: {
+        type: String,
+        default: null
+    },
+    phonenumber: {
+        type: Number,
+        default: null,
+    },
+    experience: {
+        type: Number,
+        default: null,
+    },
+    about: {
+        type: String,
+        default: null,
+    },
     properties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }],
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,
     verifyTokenExpiry: Date,
-})
+});
 
 const User = mongoose.models.users || mongoose.model("users", userSchema);
 
