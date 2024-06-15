@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 import { FaSwimmingPool, FaDumbbell, FaWifi, FaTv, FaParking, FaPaw, FaTree, FaShieldAlt, FaHouseUser, FaStar } from 'react-icons/fa';
 import { GiSmartphone } from 'react-icons/gi';
 import { TbToolsKitchen3 } from 'react-icons/tb';
@@ -13,6 +14,8 @@ import propertyData from '@/app/constants/propertyData';
 import './page.scss';
 
 const Property = ({ params }: any) => {
+    const router = useRouter();
+
     const [showReviewInput, setShowReviewInput] = useState(false);
     const [hoveredRating, setHoveredRating] = useState<number | null>(null);
     const [selectedRating, setSelectedRating] = useState<number>(Math.round(propertyData.averageReviews));
@@ -82,6 +85,9 @@ const Property = ({ params }: any) => {
         setShowReviewInput(false);
     };
 
+    const onClickAgent = () => {
+        router.push("/agents/1");
+    }
 
     return (
         <div className='container'>
@@ -181,7 +187,7 @@ const Property = ({ params }: any) => {
                             )}
                         </div>
 
-                        <div className="owner-details">
+                        <div className="owner-details" onClick={onClickAgent}>
                             <div className="owner-photo">
                                 <Image src={propertyData.owner.profilePhoto} alt="Owner" width={100} height={100} className="owner-photo-img" />
                             </div>
