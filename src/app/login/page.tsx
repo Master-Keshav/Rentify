@@ -1,13 +1,14 @@
-"use client";
+'use client'
 
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 
-import { setLoading } from "@/redux/slices/loaderSlice"
+import { setLoading } from "@/redux/slices/loaderSlice";
 
 import "./page.scss";
 
@@ -18,13 +19,19 @@ const LoginPage = () => {
         email: "",
         password: "",
     });
+    const [isForgotPassword, setIsForgotPassword] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            onLogin();
+            if (isForgotPassword) {
+                onResetPassword();
+            } else {
+                onLogin();
+            }
         }
-    }
+    };
 
     const onLogin = async () => {
         try {
@@ -35,7 +42,27 @@ const LoginPage = () => {
             router.push("/");
         } catch (error: any) {
             console.log(error.message);
-            error = error.response.data
+            error = error.response.data;
+            toast.error(error.message);
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
+
+    const onResetPassword = async () => {
+        try {
+            dispatch(setLoading(true));
+            const response = await axios.get(`/api/users/resetpassword?email=${encodeURIComponent(user.email)}`);
+            console.log("Reset password email sent", response.data);
+            toast.success("Reset password email sent");
+            setIsForgotPassword(false);
+            setUser({
+                email: "",
+                password: "",
+            });
+        } catch (error: any) {
+            console.log(error.message);
+            error = error.response.data;
             toast.error(error.message);
         } finally {
             dispatch(setLoading(false));
@@ -43,18 +70,22 @@ const LoginPage = () => {
     };
 
     useEffect(() => {
-        if (user.email.length > 0 && user.password.length > 0) {
+        if (user.email.length > 0 && (!isForgotPassword ? user.password.length > 0 : true)) {
             setButtonDisabled(false);
         } else {
             setButtonDisabled(true);
         }
-    }, [user]);
+    }, [user, isForgotPassword]);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     return (
         <>
             <div className="background-container">
                 <div className="wrapper">
-                    <h1>Login</h1>
+                    <h1>{isForgotPassword ? "Reset Password" : "Login"}</h1>
                     <div className="input-box">
                         <input
                             id="email"
@@ -62,34 +93,52 @@ const LoginPage = () => {
                             value={user.email}
                             onChange={(e) => setUser({ ...user, email: e.target.value })}
                             placeholder="Email"
-                        />
-                    </div>
-                    <div className="input-box">
-                        <input
-                            id="password"
-                            type="password"
-                            value={user.password}
-                            onChange={(e) => setUser({ ...user, password: e.target.value })}
                             onKeyDown={handleKeyPress}
-                            placeholder="Password"
                         />
                     </div>
+                    {!isForgotPassword && (
+                        <div className="input-box">
+                            <input
+                                id="password"
+                                type={showPassword ? "text" : "password"}
+                                value={user.password}
+                                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                                onKeyDown={handleKeyPress}
+                                placeholder="Password"
+                            />
+                            <span
+                                className="icon"
+                                onClick={togglePasswordVisibility}
+                            >
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </span>
+                        </div>
+                    )}
                     <div className="remember-forgot">
-                        <label htmlFor="checkbox"><input type="checkbox" /> Remember me</label>
-                        <a href="#">Forgot Password</a>
+                        {!isForgotPassword && (
+                            <label htmlFor="checkbox">
+                                <input type="checkbox" /> Remember me
+                            </label>
+                        )}
+                        <a onClick={() => setIsForgotPassword(!isForgotPassword)}>
+                            {isForgotPassword ? "Go back to Login" : "Forgot Password"}
+                        </a>
                     </div>
                     <button
-                        onClick={onLogin}
+                        onClick={isForgotPassword ? onResetPassword : onLogin}
+                        disabled={buttonDisabled}
                     >
-                        Login here
+                        {isForgotPassword ? "Reset Password" : "Login here"}
                     </button>
-                    <div className="swap-page">
-                        <Link href="/signup" className="link">Go to Signup Page</Link>
-                    </div>
+                    {!isForgotPassword && (
+                        <div className="swap-page">
+                            <Link href="/signup" className="link">Go to Signup Page</Link>
+                        </div>
+                    )}
                 </div>
             </div >
         </>
     );
-}
+};
 
-export default LoginPage
+export default LoginPage;
