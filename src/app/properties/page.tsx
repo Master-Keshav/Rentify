@@ -12,6 +12,7 @@ import Navbar from '@/app/components/navbar/navbar';
 import PropertyCard from '@/app/components/propertyCard/propertyCard';
 import { properties } from '@/app/constants/properties';
 import { setLoading } from "@/redux/slices/loaderSlice"
+import { getUserDetails } from '@/utils/userUtils';
 
 import './page.scss';
 
@@ -32,18 +33,6 @@ const Properties = () => {
     const [view, setView] = useState('Grid');
     const [userData, setUserData] = useState<UserDetailsInterface>({});
 
-    const getUserDetails = async () => {
-        try {
-            dispatch(setLoading(true));
-            const res = await axios.get('/api/users/me')
-            setUserData(res.data.user)
-        } catch (error: any) {
-            console.error("Error creating property:", error.message);
-            toast.error(error?.response?.data?.message || "Failed to Fetch User");
-        } finally {
-            dispatch(setLoading(false));
-        }
-    }
     const fetchProperties = async () => {
         try {
             dispatch(setLoading(true));
@@ -60,7 +49,16 @@ const Properties = () => {
     };
 
     useEffect(() => {
-        getUserDetails();
+        const fetchUserDetails = async () => {
+            try {
+                dispatch(setLoading(true));
+                await getUserDetails(dispatch, setUserData);
+            }
+            finally {
+                dispatch(setLoading(false));
+            }
+        };
+        fetchUserDetails();
         // fetchProperties();
     }, []);
 

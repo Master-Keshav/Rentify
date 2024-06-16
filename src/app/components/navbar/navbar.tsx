@@ -4,11 +4,12 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
 import { setLoading } from "@/redux/slices/loaderSlice"
+import { getUserDetails } from "@/utils/userUtils";
 
 import './index.scss'
 
@@ -46,9 +47,33 @@ const navProfileLink = [
     },
 ]
 
+interface UserDetailsInterface {
+    username?: string;
+    name?: string;
+    email?: string;
+    phonenumber?: string | number;
+    experience?: string | number;
+    about?: string;
+    imageUrl?: string;
+}
+
 const Navbar: any = () => {
     const dispatch = useDispatch();
     const router = useRouter()
+    const [userData, setUserData] = useState<UserDetailsInterface>({});
+
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            try {
+                dispatch(setLoading(true));
+                await getUserDetails(dispatch, setUserData);
+            }
+            finally {
+                dispatch(setLoading(false));
+            }
+        };
+        fetchUserDetails();
+    }, [])
 
     const logout = async () => {
         try {
@@ -64,6 +89,7 @@ const Navbar: any = () => {
             dispatch(setLoading(false));
         }
     }
+
     return (
         <header className="header">
             <div className="header-left">
@@ -99,7 +125,7 @@ const Navbar: any = () => {
                     <nav className="dropdownmenu">
                         <ul>
                             <li>
-                                <Link className="link menu" href='/'>Hi, Keshav</Link>
+                                <Link className="link menu" href='/'>Hi, {userData.name?.split(' ')[0]}</Link>
                                 <ul id="submenu">
                                     {navProfileLink.map((item, idx) => (
                                         <li key={idx}>
