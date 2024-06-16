@@ -5,13 +5,15 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { MdAddBusiness } from 'react-icons/md';
+import { useDispatch } from "react-redux";
 
-import LoaderModal from '@/app/components/loader/loaderModal';
 import Navbar from '@/app/components/navbar/navbar';
+import { setLoading } from "@/redux/slices/loaderSlice"
 
 import './page.scss';
 
 const CreateProperty = () => {
+    const dispatch = useDispatch();
     const router = useRouter()
     const [formData, setFormData] = useState<any>({
         title: '',
@@ -46,8 +48,6 @@ const CreateProperty = () => {
         "Office",
         "Storage Room"
     ];
-
-    const [loading, setLoading] = useState(false);
 
     const uploadImageToImgBB = async (imageFile: any) => {
         try {
@@ -103,7 +103,7 @@ const CreateProperty = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
-            setLoading(true);
+            dispatch(setLoading(true));
             const imageURLs = await Promise.all(formData.images.map(uploadImageToImgBB));
             const propertyDataWithImages = { ...formData, images: imageURLs };
             console.log(propertyDataWithImages)
@@ -115,13 +115,12 @@ const CreateProperty = () => {
             console.error("Error creating property:", error.message);
             toast.error(error?.response?.data?.message || "Failed to create property");
         } finally {
-            setLoading(false);
+            dispatch(setLoading(false));
         }
     };
 
     return (
         <div className='container'>
-            {loading ? <LoaderModal isOpen={loading} /> : <></>}
             <div className='background'></div>
             <Navbar />
             <div className="create-property-container">

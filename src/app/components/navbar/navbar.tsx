@@ -3,11 +3,12 @@
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
-import LoaderModal from "@/app/components/loader/loaderModal";
+import { setLoading } from "@/redux/slices/loaderSlice"
 
 import './index.scss'
 
@@ -46,12 +47,12 @@ const navProfileLink = [
 ]
 
 const Navbar: any = () => {
+    const dispatch = useDispatch();
     const router = useRouter()
-    const [loading, setLoading] = useState(false);
 
     const logout = async () => {
         try {
-            setLoading(true);
+            dispatch(setLoading(true));
             await axios.get('/api/users/logout')
             toast.success('Logout successful')
             router.push('/login')
@@ -60,12 +61,11 @@ const Navbar: any = () => {
             error = error.response.data
             toast.error(error.message);
         } finally {
-            setLoading(false);
+            dispatch(setLoading(false));
         }
     }
     return (
         <header className="header">
-            {loading ? <LoaderModal isOpen={loading} /> : <></>}
             <div className="header-left">
                 <Link href="/">
                     <div>

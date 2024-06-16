@@ -2,14 +2,17 @@
 
 import axios from "axios";
 import Link from "next/link";
-import LoaderModal from "../components/loader/loaderModal";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+
+import { setLoading } from "@/redux/slices/loaderSlice"
 
 import './page.scss';
 
 const SignupPage = () => {
+    const dispatch = useDispatch();
     const router = useRouter();
 
     const [user, setUser] = useState({
@@ -18,7 +21,6 @@ const SignupPage = () => {
         username: "",
     })
     const [buttonDisabled, setButtonDisabled] = useState(false);
-    const [loading, setLoading] = useState(false);
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
@@ -28,7 +30,7 @@ const SignupPage = () => {
 
     const onSignup = async () => {
         try {
-            setLoading(true);
+            dispatch(setLoading(true));
             const response = await axios.post("/api/users/signup", user);
             console.log("Signup success", response.data);
             router.push("/login");
@@ -38,7 +40,7 @@ const SignupPage = () => {
             error = error.response.data
             toast.error(error.message);
         } finally {
-            setLoading(false);
+            dispatch(setLoading(false));
         }
     }
 
@@ -53,7 +55,6 @@ const SignupPage = () => {
     return (
         <>
             <div className="background-container">
-                {loading ? <LoaderModal isOpen={loading} /> : <></>}
                 <div className="wrapper">
                     <h1>Signup</h1>
                     <div className="input-box">

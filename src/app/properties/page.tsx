@@ -4,13 +4,14 @@ import axios from 'axios';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { useDispatch } from "react-redux";
 
 import Filter from '@/app/components/filter/filter';
 import Footer from '@/app/components/footer/footer';
-import LoaderModal from '@/app/components/loader/loaderModal';
 import Navbar from '@/app/components/navbar/navbar';
 import PropertyCard from '@/app/components/propertyCard/propertyCard';
 import { properties } from '@/app/constants/properties';
+import { setLoading } from "@/redux/slices/loaderSlice"
 
 import './page.scss';
 
@@ -25,27 +26,27 @@ interface UserDetailsInterface {
 }
 
 const Properties = () => {
+    const dispatch = useDispatch();
     // const [properties, setProperties] = useState([]);
     const [filteredType, setFilteredType] = useState('All');
     const [view, setView] = useState('Grid');
-    const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState<UserDetailsInterface>({});
 
     const getUserDetails = async () => {
         try {
-            setLoading(true);
+            dispatch(setLoading(true));
             const res = await axios.get('/api/users/me')
             setUserData(res.data.user)
         } catch (error: any) {
             console.error("Error creating property:", error.message);
             toast.error(error?.response?.data?.message || "Failed to Fetch User");
         } finally {
-            setLoading(false);
+            dispatch(setLoading(false));
         }
     }
     const fetchProperties = async () => {
         try {
-            setLoading(true);
+            dispatch(setLoading(true));
             const response = await axios.get('/api/properties/all');
             // setProperties(response.data.properties);
             toast.success('Properties fetched successfully');
@@ -54,7 +55,7 @@ const Properties = () => {
             toast.error('Failed to fetch properties');
         }
         finally {
-            setLoading(false);
+            dispatch(setLoading(false));
         }
     };
 
@@ -77,7 +78,6 @@ const Properties = () => {
 
     return (
         <div className="container">
-            {loading ? <LoaderModal isOpen={loading} /> : <></>}
             <Navbar />
             <div className="page-list-container">
                 <div className="filter">

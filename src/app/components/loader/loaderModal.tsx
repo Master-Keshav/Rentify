@@ -1,14 +1,15 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import { useSelector } from 'react-redux';
+import React from 'react';
 import Image from 'next/image';
+
+import { RootState } from '@/redux/store';
 
 import './index.scss';
 
-interface LoaderModalProps {
-    isOpen: boolean;
-}
+const LoaderModal: React.FC = () => {
+    const isOpen = useSelector((state: RootState) => state.loader.loading);
 
-const LoaderModal: React.FC<LoaderModalProps> = ({ isOpen }) => {
     const loaderVariants = {
         hidden: {
             opacity: 0,

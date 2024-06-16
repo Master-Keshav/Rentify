@@ -3,8 +3,9 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { useDispatch } from "react-redux";
 
-import LoaderModal from '../loader/loaderModal';
+import { setLoading } from "@/redux/slices/loaderSlice"
 
 import './styles.scss';
 
@@ -25,6 +26,7 @@ interface AgentDetailsModalProps {
 }
 
 const AgentDetailsModal: React.FC<AgentDetailsModalProps> = ({ isOpen, onClose, userDetails }) => {
+    const dispatch = useDispatch();
     const [updatedUserDetails, setUpdatedUserDetails] = useState<UserDetailsInterface>({
         username: '',
         name: '',
@@ -34,7 +36,6 @@ const AgentDetailsModal: React.FC<AgentDetailsModalProps> = ({ isOpen, onClose, 
         about: '',
         imageUrl: '',
     });
-    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -55,7 +56,7 @@ const AgentDetailsModal: React.FC<AgentDetailsModalProps> = ({ isOpen, onClose, 
         try {
             const imageFile = e.target.files?.[0];
             if (imageFile) {
-                setLoading(true);
+                dispatch(setLoading(true));
                 const uploadedImageUrl = await uploadImageToImgBB(imageFile);
                 setUpdatedUserDetails(prevDetails => ({
                     ...prevDetails,
@@ -66,7 +67,7 @@ const AgentDetailsModal: React.FC<AgentDetailsModalProps> = ({ isOpen, onClose, 
             console.error('Error uploading image:', error);
             toast.error('Error uploading image.');
         } finally {
-            setLoading(false);
+            dispatch(setLoading(false));
         }
     };
 
@@ -98,7 +99,7 @@ const AgentDetailsModal: React.FC<AgentDetailsModalProps> = ({ isOpen, onClose, 
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setLoading(true);
+        dispatch(setLoading(true));
 
         try {
             const response = await axios.post('/api/users/update', updatedUserDetails);
@@ -112,7 +113,7 @@ const AgentDetailsModal: React.FC<AgentDetailsModalProps> = ({ isOpen, onClose, 
             console.error('Failed to update user details:', error);
             toast.error('Failed to update user details.');
         } finally {
-            setLoading(false);
+            dispatch(setLoading(false));
         }
     };
 
@@ -129,7 +130,6 @@ const AgentDetailsModal: React.FC<AgentDetailsModalProps> = ({ isOpen, onClose, 
 
     return (
         <div className="modal">
-            {loading && <LoaderModal isOpen={loading} />}
             <div className="modal-content">
                 <span className="close" onClick={onClose}>&times;</span>
                 <h2>Add Agent Details</h2>
