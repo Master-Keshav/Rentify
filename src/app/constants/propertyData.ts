@@ -1,4 +1,5 @@
 export interface PropertyData {
+    _id: string,
     images: string[];
     title: string;
     about: string;
@@ -22,6 +23,7 @@ export interface OwnerDetails {
 }
 
 const propertyData: PropertyData = {
+    _id: '6670860ed5d342e13112cef7',
     images: [
         '/p1.jpg',
         '/p2.jpg',

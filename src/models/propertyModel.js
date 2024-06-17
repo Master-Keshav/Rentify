@@ -44,35 +44,12 @@ const propertySchema = new mongoose.Schema({
         required: [true, "Please provide a price"],
     },
     reviews: {
-        type: [{
-            user: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User',
-                required: true
-            },
-            review: {
-                type: Number,
-                required: true
-            }
-        }],
-        default: function () {
-            return [{
-                user: this.owner,
-                review: 5
-            }];
-        }
-    },
-    averageReviews: {
-        type: Number,
-        default: 5,
-        get: function () {
-            if (this.reviews.length === 0) {
-                return 5;
-            } else {
-                const sumOfReviews = this.reviews.reduce((acc, review) => acc + review.review, 0);
-                return sumOfReviews / this.reviews.length;
-            }
-        }
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Review',
+        validate: {
+            validator: (reviewsArray) => reviewsArray instanceof Array,
+            message: "Please provide reviews as an array",
+        },
     },
     location: {
         type: String,
@@ -90,6 +67,21 @@ const propertySchema = new mongoose.Schema({
         type: Number,
         required: [true, "Please provide the number of parking spaces"],
     }
+}, {
+    timestamps: true
+});
+
+propertySchema.virtual('averageReviews').get(function () {
+    if (this.reviews.length === 0) {
+        return 5;
+    } else {
+        const sumOfReviews = this.reviews.reduce((acc, review) => acc + review.rating, 0);
+        return sumOfReviews / this.reviews.length;
+    }
+});
+
+propertySchema.virtual('totalReviews').get(function () {
+    return this.reviews.length;
 });
 
 const Property = mongoose.models.properties || mongoose.model("properties", propertySchema);

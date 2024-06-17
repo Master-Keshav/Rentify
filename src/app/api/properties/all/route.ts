@@ -11,8 +11,8 @@ export async function GET(request: NextRequest) {
                 $project: {
                     image: { $first: "$images" },
                     price: 1,
-                    averageReviews: 1,
-                    totalReviews: { $size: { $ifNull: ["$reviews", []] } },
+                    averageReviews: "$averageReviews",
+                    // totalReviews: { $size: "reviews?.[]" },
                     tag: 1,
                     houseType: 1,
                     location: 1

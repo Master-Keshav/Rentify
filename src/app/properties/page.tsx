@@ -59,7 +59,7 @@ const Properties = () => {
             }
         };
         fetchUserDetails();
-        // fetchProperties();
+        fetchProperties();
     }, []);
 
     const handleTypeChange = (type: string) => {

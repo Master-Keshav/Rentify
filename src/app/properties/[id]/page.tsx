@@ -1,26 +1,30 @@
 'use client';
 
+import axios from 'axios';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { toast } from "react-hot-toast";
 import { FaSwimmingPool, FaDumbbell, FaWifi, FaTv, FaParking, FaPaw, FaTree, FaShieldAlt, FaHouseUser, FaStar } from 'react-icons/fa';
 import { GiSmartphone } from 'react-icons/gi';
 import { TbToolsKitchen3 } from 'react-icons/tb';
+import { useDispatch } from "react-redux";
 
 import Navbar from '@/app/components/navbar/navbar';
 import propertyData from '@/app/constants/propertyData';
+import { setLoading } from "@/redux/slices/loaderSlice"
 
 import './page.scss';
 
 const Property = ({ params }: any) => {
+    const dispatch = useDispatch();
     const router = useRouter();
 
     const [showReviewInput, setShowReviewInput] = useState(false);
     const [hoveredRating, setHoveredRating] = useState<number | null>(null);
     const [selectedRating, setSelectedRating] = useState<number>(Math.round(propertyData.averageReviews));
     const [reviewText, setReviewText] = useState<string>('');
-
 
     const amenityIcons: any = {
         "Swimming Pool": <FaSwimmingPool className="icon" />,
@@ -80,9 +84,27 @@ const Property = ({ params }: any) => {
         setShowReviewInput(false);
     };
 
-    const handleOkClick = () => {
-        console.log('Review submitted:', reviewText, selectedRating);
-        setShowReviewInput(false);
+    const handleOkClick = async () => {
+        try {
+            dispatch(setLoading(true));
+            let payload = {
+                property: propertyData._id,
+                rating: selectedRating,
+                comment: reviewText
+            };
+            console.log(payload);
+            const response = await axios.post('/api/reviews/create', payload);
+            toast.success(response.data.message)
+            console.log('Review submitted:', response.data);
+            setShowReviewInput(false);
+            setReviewText('');
+        } catch (error: any) {
+            toast.error(error.response.data.message)
+            console.error('Error submitting review:', error);
+        }
+        finally {
+            dispatch(setLoading(false));
+        }
     };
 
     const onClickAgent = () => {
