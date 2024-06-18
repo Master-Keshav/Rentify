@@ -26,13 +26,11 @@ const propertySchema = new mongoose.Schema({
     },
     houseType: {
         type: String,
-        required: true,
-        default: [],
+        required: [true, "Please provide a houseType"],
     },
     tag: {
         type: String,
-        required: true,
-        default: [],
+        required: [true, "Please provide a tag"],
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
@@ -43,14 +41,7 @@ const propertySchema = new mongoose.Schema({
         type: Number,
         required: [true, "Please provide a price"],
     },
-    reviews: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Review',
-        validate: {
-            validator: (reviewsArray) => reviewsArray instanceof Array,
-            message: "Please provide reviews as an array",
-        },
-    },
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
     location: {
         type: String,
         required: [true, "Please provide a location"],
@@ -68,20 +59,21 @@ const propertySchema = new mongoose.Schema({
         required: [true, "Please provide the number of parking spaces"],
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true },
+});
+
+propertySchema.virtual('totalReviews').get(function () {
+    return this.reviews.length;
 });
 
 propertySchema.virtual('averageReviews').get(function () {
     if (this.reviews.length === 0) {
         return 5;
     } else {
-        const sumOfReviews = this.reviews.reduce((acc, review) => acc + review.rating, 0);
-        return sumOfReviews / this.reviews.length;
+        const sumOfRatings = this.reviews.reduce((acc, review) => acc + review.rating, 0);
+        return sumOfRatings / this.reviews.length;
     }
-});
-
-propertySchema.virtual('totalReviews').get(function () {
-    return this.reviews.length;
 });
 
 const Property = mongoose.models.properties || mongoose.model("properties", propertySchema);

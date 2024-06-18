@@ -1,5 +1,3 @@
-// reviewModel.js
-
 import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema({
@@ -13,22 +11,16 @@ const reviewSchema = new mongoose.Schema({
         ref: 'Property',
         required: [true, "Please provide the property's ID"],
     },
-    reviews: [{
-        rating: {
-            type: Number,
-            required: [true, "Please provide a rating"],
-            min: 1,
-            max: 5
-        },
-        comment: {
-            type: String,
-            default: ''
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now
-        }
-    }]
+    rating: {
+        type: Number,
+        required: [true, "Please provide a rating"],
+        min: 1,
+        max: 5
+    },
+    comment: {
+        type: String,
+        default: ''
+    },
 }, {
     timestamps: true
 });

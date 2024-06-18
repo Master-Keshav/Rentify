@@ -168,12 +168,12 @@ const CreateProperty = () => {
 
                         <div className="form-input area">
                             <label>Area:</label>
-                            <input type="text" name="area" value={formData.area} onChange={handleChange} placeholder="Enter property area" required />
+                            <input type="number" name="area" value={formData.area} onChange={handleChange} placeholder="Enter property area" required />
                         </div>
 
                         <div className="form-input builtYear">
                             <label>Built Year:</label>
-                            <input type="text" name="builtYear" value={formData.builtYear} onChange={handleChange} placeholder="Enter built year" required />
+                            <input type="number" name="builtYear" value={formData.builtYear} onChange={handleChange} placeholder="Enter built year" required />
                         </div>
                     </div>
 

@@ -88,7 +88,7 @@ const Property = ({ params }: any) => {
         try {
             dispatch(setLoading(true));
             let payload = {
-                property: propertyData._id,
+                property_id: propertyData._id,
                 rating: selectedRating,
                 comment: reviewText
             };

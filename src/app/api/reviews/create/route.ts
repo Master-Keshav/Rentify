@@ -1,49 +1,44 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { connect } from "@/dbConfig/dbConfig";
 import { getDataFromToken } from "@/helpers/getDataFromToken";
+import Property from "@/models/propertyModel";
 import Review from "@/models/reviewModel";
 import User from "@/models/userModel";
-import Property from "@/models/propertyModel";
 
 connect();
 
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { property, rating, comment } = reqBody;
-        console.log(reqBody);
-        console.log(property, rating, comment);
+        const { property_id, rating, comment } = reqBody;
+        console.log("reqBody", reqBody);
 
         const userId = getDataFromToken(request);
-        const currentUser = await User.findById(userId);
-        if (!currentUser) {
+        const user = await User.findById(userId);
+        if (!user) {
             return NextResponse.json({ message: "User not found" }, { status: 404 });
         }
-        console.log("currentUser")
-        console.log(currentUser)
+        console.log("user", user)
 
-        const propertyExists = await Property.findById(property);
-        if (!propertyExists) {
+        const property = await Property.findById(property_id);
+        if (!property) {
             return NextResponse.json({ message: "Property not found" }, { status: 404 });
         }
-        console.log("propertyExists")
-        console.log(propertyExists)
+        console.log("property", property);
 
         const existingReview = await Review.findOne({ user: userId, property });
         if (existingReview) {
-            existingReview.reviews.push({
-                rating,
-                comment,
-                createdAt: new Date()
-            });
+            existingReview.rating = rating
+            existingReview.comment = comment
             await existingReview.save();
 
-            console.log("Review acknowledged", existingReview.reviews);
+            console.log("Review updated", existingReview.reviews);
 
             return NextResponse.json({
-                message: "Review acknowledged",
+                message: "Review Updated",
                 success: true,
-                reviews: existingReview.reviews 
+                reviews: existingReview
             }, { status: 200 });
         }
 
@@ -52,13 +47,14 @@ export async function POST(request: NextRequest) {
         const newReview = new Review({
             user: userId,
             property,
-            reviews: [{
-                rating,
-                comment
-            }]
+            rating: rating,
+            comment: comment,
         });
 
         await newReview.save();
+
+        property.reviews.push(newReview._id);
+        await property.save();
 
         console.log("New review created:", newReview);
 

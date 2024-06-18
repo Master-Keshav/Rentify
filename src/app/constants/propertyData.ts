@@ -23,7 +23,7 @@ export interface OwnerDetails {
 }
 
 const propertyData: PropertyData = {
-    _id: '6670860ed5d342e13112cef7',
+    _id: '6671c9c2396c62900612be7a',
     images: [
         '/p1.jpg',
         '/p2.jpg',
