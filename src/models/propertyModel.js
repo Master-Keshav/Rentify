@@ -42,6 +42,7 @@ const propertySchema = new mongoose.Schema({
         required: [true, "Please provide a price"],
     },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+    likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     location: {
         type: String,
         required: [true, "Please provide a location"],
@@ -55,6 +56,18 @@ const propertySchema = new mongoose.Schema({
         required: [true, "Please provide the year the property was built"],
     },
     parkingSpaces: {
+        type: Number,
+        required: [true, "Please provide the number of parking spaces"],
+    },
+    beds: {
+        type: Number,
+        required: [true, "Please provide the number of parking spaces"],
+    },
+    bedrooms: {
+        type: Number,
+        required: [true, "Please provide the number of parking spaces"],
+    },
+    washrooms: {
         type: Number,
         required: [true, "Please provide the number of parking spaces"],
     }

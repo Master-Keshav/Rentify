@@ -12,10 +12,11 @@ export async function GET(request: NextRequest) {
 
         const customizedProperties = properties.map(property => {
             return {
-                _id: property._id,
+                id: property._id,
                 averageReviews: property.averageReviews,
                 createdAt: property.createdAt,
-                images: property.images.length > 0 ? property.images[0] : null,
+                houseType: property.houseType,
+                image: property.images.length > 0 ? property.images[0] : null,
                 location: property.location,
                 price: property.price,
                 tag: property.tag,

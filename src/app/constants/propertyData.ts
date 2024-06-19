@@ -19,7 +19,10 @@ export interface OwnerDetails {
     profilePhoto: string;
     name: string;
     about: string;
-    contact: string;
+    contact: {
+        email: string;
+        phone: string;
+    }
 }
 
 const propertyData: PropertyData = {
@@ -51,7 +54,10 @@ const propertyData: PropertyData = {
         profilePhoto: '/p1.jpg',
         name: "John Doe",
         about: "Real estate entrepreneur with over 10 years of experience.",
-        contact: "johndoe@example.com | +1234567890"
+        contact: {
+            email: "johndoe@example.com",
+            phone: "+1234567890",
+        }
     },
     tags: [
         "2 Bedrooms",
