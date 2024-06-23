@@ -114,6 +114,21 @@ body {
         }
     }
 
+    .google-login-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // background-color: #4285F4;
+        background-color: #FFFFFF;
+        margin-top: 10px;
+        height: 45px;
+        border-radius: 40px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
     .swap-page {
         font-size: 14.5px;
         text-align: center;

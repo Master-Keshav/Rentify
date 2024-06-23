@@ -1,6 +1,7 @@
 'use client'
 
 import axios from "axios";
+import jwt from 'jsonwebtoken';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -8,6 +9,7 @@ import { toast } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 
+import { GoogleLogin, GoogleOAuthProvider, CredentialResponse } from "@react-oauth/google";
 import { setLoading } from "@/redux/slices/loaderSlice";
 
 import "./page.scss";
@@ -81,8 +83,50 @@ const LoginPage = () => {
         setShowPassword(!showPassword);
     };
 
+    const onGoogleSuccess = async (googleResponse: CredentialResponse) => {
+        try {
+            dispatch(setLoading(true));
+
+            if (!googleResponse.credential) {
+                throw new Error("Google response does not contain a credential.");
+            }
+
+            const decodedToken = jwt.decode(googleResponse.credential) as {
+                email?: string,
+                sub?: string
+            };
+
+            if (!decodedToken) {
+                throw new Error("Failed to decode Google response.");
+            }
+
+            const payload = {
+                email: decodedToken.email || "",
+                googleId: decodedToken.sub || "",
+            };
+
+            console.log(payload)
+            try {
+                const loginResponse = await axios.post("/api/users/google/login", payload);
+                console.log("Google login success:", loginResponse.data);
+                toast.success("Login success");
+                router.push("/");
+            } catch (error: any) {
+                console.log(error.message)
+                error = error.response.data;
+                toast.error(error.message);
+            }
+
+        } catch (decodeError: any) {
+            console.error("Error decoding Google response:", decodeError.message);
+            toast.error("Failed to decode Google response");
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
+
     return (
-        <>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
             <div className="background-container">
                 <div className="wrapper">
                     <h1>{isForgotPassword ? "Reset Password" : "Login"}</h1>
@@ -130,14 +174,25 @@ const LoginPage = () => {
                     >
                         {isForgotPassword ? "Reset Password" : "Login here"}
                     </button>
+                    <div className="google-login-button">
+                        <GoogleLogin
+                            onSuccess={onGoogleSuccess}
+                            onError={() => {
+                                console.log('Login Failed');
+                                toast.error("Google login failed");
+                            }}
+                        />
+                    </div>
                     {!isForgotPassword && (
-                        <div className="swap-page">
-                            <Link href="/signup" className="link">Go to Signup Page</Link>
-                        </div>
+                        <>
+                            <div className="swap-page">
+                                <Link href="/signup" className="link">Go to Signup Page</Link>
+                            </div>
+                        </>
                     )}
                 </div>
             </div >
-        </>
+        </GoogleOAuthProvider >
     );
 };
 

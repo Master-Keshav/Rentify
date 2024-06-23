@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, "Please provide a password"],
+        required: false,
     },
     isVerified: {
         type: Boolean,
@@ -42,6 +42,14 @@ const userSchema = new mongoose.Schema({
     about: {
         type: String,
         default: null,
+    },
+    source: {
+        type: Number,
+        default: 0,
+    },
+    googleId: {
+        type: String,
+        default: "",
     },
     properties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }],
     forgotPasswordToken: String,

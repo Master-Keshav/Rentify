@@ -125,7 +125,7 @@ const Navbar: any = () => {
                     <nav className="dropdownmenu">
                         <ul>
                             <li>
-                                <Link className="link menu" href='/'>Hi, {userData.name?.split(' ')[0] || userData.username}</Link>
+                                <Link className="link menu" href='/'>Hi, {userData.name?.split(' ')[0] || userData.username?.split(' ')[0] || userData.username}</Link>
                                 <ul id="submenu">
                                     {navProfileLink.map((item, idx) => (
                                         <li key={idx}>
