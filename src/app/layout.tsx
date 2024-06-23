@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 
 import LoaderWrapper from "@/app/components/loader/LoaderWrapper";
+import NotificationWrapper from "./components/components/notification/NotificationWrapper";
 
 import "./globals.css";
 
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Provider store={store}>
           <Toaster position="top-right" />
           <LoaderWrapper />
+          <NotificationWrapper />
           {children}
         </Provider>
       </body>

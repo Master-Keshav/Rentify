@@ -10,6 +10,7 @@ import AgentDetailsModal from '../modal/AgentDetailsModal';
 import './index.scss';
 
 interface UserDetailsInterface {
+    id?: string;
     username?: string;
     name?: string;
     email?: string;
@@ -17,6 +18,7 @@ interface UserDetailsInterface {
     experience?: string | number;
     about?: string;
     imageUrl?: string;
+    hasPassword?: boolean;
 }
 
 interface FilterProps {

@@ -1,6 +1,7 @@
 'use client'
 
 import axios from "axios";
+import bcryptjs from "bcryptjs";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -8,7 +9,8 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
-import { setLoading } from "@/redux/slices/loaderSlice"
+import { setLoading } from "@/redux/slices/loaderSlice";
+import { showNotification } from "@/redux/slices/notificationSlice";
 import { getUserDetails } from "@/utils/userUtils";
 
 import './index.scss'
@@ -48,6 +50,7 @@ const navProfileLink = [
 ]
 
 interface UserDetailsInterface {
+    id?: string;
     username?: string;
     name?: string;
     email?: string;
@@ -55,11 +58,12 @@ interface UserDetailsInterface {
     experience?: string | number;
     about?: string;
     imageUrl?: string;
+    hasPassword?: boolean;
 }
 
-const Navbar: any = () => {
+const Navbar: React.FC = () => {
     const dispatch = useDispatch();
-    const router = useRouter()
+    const router = useRouter();
     const [userData, setUserData] = useState<UserDetailsInterface>({});
 
     useEffect(() => {
@@ -67,13 +71,45 @@ const Navbar: any = () => {
             try {
                 dispatch(setLoading(true));
                 await getUserDetails(dispatch, setUserData);
-            }
-            finally {
+            } finally {
                 dispatch(setLoading(false));
             }
         };
         fetchUserDetails();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        const getHashedToken = async () => {
+            const hashedToken = await bcryptjs.hash(userData.id!.toString(), 10);
+            return hashedToken;
+        };
+
+        const showPasswordNotification = async () => {
+            try {
+                const hashedToken = await getHashedToken();
+                if (!userData.hasPassword) {
+                    dispatch(
+                        showNotification({
+                            heading: "Password Required",
+                            bodyContent: (
+                                <p>
+                                    Please add a password to secure your account.
+                                    <Link href={`/addpassword?token=${hashedToken}`}>
+                                        Click here
+                                    </Link>
+                                    .
+                                </p>
+                            ),
+                        })
+                    );
+                }
+            } catch (error: any) {
+                console.error("Error hashing token:", error.message);
+            }
+        };
+
+        showPasswordNotification();
+    }, [userData]);
 
     const logout = async () => {
         try {
@@ -88,7 +124,7 @@ const Navbar: any = () => {
         } finally {
             dispatch(setLoading(false));
         }
-    }
+    };
 
     return (
         <header className="header">
@@ -102,18 +138,11 @@ const Navbar: any = () => {
             <div className="header-middle">
                 <nav>
                     <ul>
-                        {
-                            navLink.map((item, idx) => (
-                                <>
-                                    <li key={idx}>
-                                        <Link href={item.link}>
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                    {idx === navLink.length - 1 ? null : <span>|</span>}
-                                </>
-                            ))
-                        }
+                        {navLink.map((item, idx) => (
+                            <li key={idx}>
+                                <Link href={item.link}>{item.name}</Link>
+                            </li>
+                        ))}
                     </ul>
                 </nav>
             </div>

@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -117,7 +117,7 @@
                             opacity: 0;
                             position: absolute;
                             visibility: hidden;
-                            z-index: 1;
+                            z-index: 10;
 
                             li {
                                 float: none;

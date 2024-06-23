@@ -9,17 +9,23 @@ connect();
 export async function GET(request: NextRequest) {
     try {
         const userId = await getDataFromToken(request);
-        const user = await User.findOne({ _id: userId }).select("username name email properties phonenumber experience imageUrl about");
+        const user = await User.findOne({ _id: userId }).select("username name email properties phonenumber experience imageUrl about password");
 
         if (!user) {
             return NextResponse.json({ message: "User not found" }, { status: 404 });
         }
 
-        console.log(user)
+        const hasPassword = !!user.password;
+
+        const userObject = user.toObject();
+        delete userObject.password;
 
         return NextResponse.json({
             message: "User found",
-            user: user
+            user: {
+                ...userObject,
+                hasPassword
+            }
         });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 400 });
