@@ -1,7 +1,6 @@
 'use client'
 
 import axios from "axios";
-import bcryptjs from "bcryptjs";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,7 +9,7 @@ import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
 import { setLoading } from "@/redux/slices/loaderSlice";
-import { showNotification } from "@/redux/slices/notificationSlice";
+import { hideNotification, showNotification } from "@/redux/slices/notificationSlice";
 import { getUserDetails } from "@/utils/userUtils";
 
 import './index.scss'
@@ -78,26 +77,33 @@ const Navbar: React.FC = () => {
         fetchUserDetails();
     }, []);
 
-    useEffect(() => {
-        const getHashedToken = async () => {
-            const hashedToken = await bcryptjs.hash(userData.id!.toString(), 10);
-            return hashedToken;
-        };
+    const onResetPassword = async () => {
+        try {
+            dispatch(setLoading(true));
+            const response = await axios.get(`/api/users/resetpassword?email=${encodeURIComponent(userData.email!)}`);
+            console.log("Reset password email sent", response.data);
+            toast.success("Reset password email sent");
+            dispatch(hideNotification());
+        } catch (error: any) {
+            console.log(error.message);
+            error = error.response.data;
+            toast.error(error.message);
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
 
+    useEffect(() => {
         const showPasswordNotification = async () => {
             try {
-                const hashedToken = await getHashedToken();
-                if (!userData.hasPassword) {
+                if ('hasPassword' in userData && !userData.hasPassword) {
                     dispatch(
                         showNotification({
                             heading: "Password Required",
                             bodyContent: (
                                 <p>
                                     Please add a password to secure your account.
-                                    <Link href={`/addpassword?token=${hashedToken}`}>
-                                        Click here
-                                    </Link>
-                                    .
+                                    <span onClick={onResetPassword}>Click here.</span>
                                 </p>
                             ),
                         })
