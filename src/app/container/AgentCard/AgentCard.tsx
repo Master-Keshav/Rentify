@@ -12,14 +12,14 @@ const AgentCard = ({ agent }: any) => {
     const router = useRouter();
 
     const onClickAgent = () => {
-        router.push(`/agents/${agent.id}`);
+        router.push(`/agents/${agent._id}`);
     };
 
     return (
         <div className='agent-card' onClick={onClickAgent}>
             <div className='agent-photo'>
                 <Image
-                    src={agent.photo}
+                    src={agent.imageUrl}
                     alt={agent.name}
                     quality={100}
                     width={200}
@@ -35,8 +35,8 @@ const AgentCard = ({ agent }: any) => {
                     </h1>
                 </div>
                 <div className='agent-details'>
-                    <p>Experience: {agent.experience}</p>
-                    <p>Phone: {agent.phoneNumber}</p>
+                    <p>Experience: {agent.experience}+ years</p>
+                    <p>Phone: {agent.phonenumber}</p>
                     <p>Email: {agent.email}</p>
                     <p>About: {agent.about}</p>
                 </div>

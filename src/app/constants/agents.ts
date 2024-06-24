@@ -2,7 +2,7 @@ const agents = [
     {
         id: 1,
         name: "John Doe",
-        photo: "/p1.jpg",
+        imageUrl: "/p1.jpg",
         about: "Over 10 years in luxury real estate, specializing in high-end properties.",
         phoneNumber: "+1234567890",
         email: "john.doe@example.com",
@@ -11,7 +11,7 @@ const agents = [
     {
         id: 2,
         name: "Jane Smith",
-        photo: "/p2.jpg",
+        imageUrl: "/p2.jpg",
         about: "Architect turned real estate advisor, passionate about sustainable living.",
         phoneNumber: "+1987654321",
         email: "jane.smith@example.com",
@@ -20,7 +20,7 @@ const agents = [
     {
         id: 3,
         name: "Michael Johnson",
-        photo: "/p3.jpg",
+        imageUrl: "/p3.jpg",
         about: "Specializes in commercial properties, helping businesses find ideal locations.",
         phoneNumber: "+1122334455",
         email: "michael.johnson@example.com",
@@ -29,7 +29,7 @@ const agents = [
     {
         id: 4,
         name: "Emily Brown",
-        photo: "/p4.jpg",
+        imageUrl: "/p4.jpg",
         about: "Helping families find dream homes, committed to client satisfaction.",
         phoneNumber: "+1448877665",
         email: "emily.brown@example.com",
@@ -38,7 +38,7 @@ const agents = [
     {
         id: 5,
         name: "David Wilson",
-        photo: "/p5.jpg",
+        imageUrl: "/p5.jpg",
         about: "Real estate investor and advisor, focusing on investment strategies.",
         phoneNumber: "+1555666777",
         email: "david.wilson@example.com",
@@ -47,7 +47,7 @@ const agents = [
     {
         id: 6,
         name: "Sarah Taylor",
-        photo: "/p6.jpg",
+        imageUrl: "/p6.jpg",
         about: "Expert in rental property management, dedicated to tenant and owner satisfaction.",
         phoneNumber: "+1666888999",
         email: "sarah.taylor@example.com",
