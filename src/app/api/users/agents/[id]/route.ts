@@ -22,7 +22,7 @@ export async function GET(request: NextRequest, { params }: { params: Params }) 
         const properties = await Property.find({ _id: { $in: agent.properties } });
 
         const agentData = {
-            id: agent._id,
+            _id: agent._id,
             name: agent.name,
             imageUrl: agent.imageUrl,
             about: agent.about,

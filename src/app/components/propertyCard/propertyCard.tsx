@@ -33,7 +33,7 @@ const PropertyCard = ({ property }: any) => {
     }, []);
 
     useEffect(() => {
-        if (property.likedBy.includes(userData.id)) setLiked(true);
+        if (property && userData && property?.likedBy?.includes(userData?.id)) setLiked(true);
     }, [userData])
 
     const handleLike = async () => {
