@@ -106,10 +106,11 @@ const Property = ({ params }: any) => {
     };
 
     const handleOkClick = async () => {
+        console.log(propertyData)
         try {
             dispatch(setLoading(true));
             let payload = {
-                property_id: propertyData._id,
+                property_id: propertyData.id,
                 rating: selectedRating,
                 comment: reviewText
             };
