@@ -1,10 +1,11 @@
 'use client'
 
+import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 
-import Bargraph from '@/app/components/charts/bargraph';
-import Donut from '@/app/components/charts/donut'
-import Line from '@/app/components/charts/line'
+const Donut = dynamic(() => import('@/app/components/charts/donut'), { ssr: false });
+const Line = dynamic(() => import('@/app/components/charts/line'), { ssr: false });
+const Bargraph = dynamic(() => import('@/app/components/charts/bargraph'), { ssr: false });
 import Navbar from '@/app/components/navbar/navbar';
 
 import "./page.scss"
@@ -101,4 +102,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard
+export default Dashboard;
