@@ -4,10 +4,10 @@ import { Poppins } from "next/font/google";
 import React from "react";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
-import { store } from "@/redux/store";
 
 import LoaderWrapper from "@/app/components/loader/LoaderWrapper";
 import NotificationWrapper from "@/app/components/notification/NotificationWrapper";
+import { store } from "@/redux/store";
 
 import "./globals.css";
 
