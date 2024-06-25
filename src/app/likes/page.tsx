@@ -9,7 +9,6 @@ import Filter from '@/app/components/filter/filter';
 import Footer from '@/app/components/footer/footer';
 import Navbar from '@/app/components/navbar/navbar';
 import PropertyCard from '@/app/components/propertyCard/propertyCard';
-// import { properties } from '@/app/constants/properties';
 import { setLoading } from "@/redux/slices/loaderSlice"
 import { getUserDetails } from '@/utils/userUtils';
 
@@ -27,7 +26,7 @@ interface UserDetailsInterface {
     hasPassword?: boolean;
 }
 
-const Properties = () => {
+const Likes = () => {
     const dispatch = useDispatch();
     const [properties, setProperties] = useState([]);
     const [filteredType, setFilteredType] = useState('All');
@@ -37,7 +36,7 @@ const Properties = () => {
     const fetchProperties = async () => {
         try {
             dispatch(setLoading(true));
-            const response = await axios.get('/api/properties/all');
+            const response = await axios.get('/api/properties/likes');
             setProperties(response.data.properties);
             toast.success('Properties fetched successfully');
         } catch (error) {
@@ -95,4 +94,4 @@ const Properties = () => {
     );
 };
 
-export default Properties;
+export default Likes;

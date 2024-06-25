@@ -1,16 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { connect } from "@/dbConfig/dbConfig";
+import { getDataFromToken } from "@/helpers/getDataFromToken";
 import Property from "@/models/propertyModel";
-import Review from "@/models/reviewModel";
+import User from "@/models/userModel";
 
 connect();
 
 export async function GET(request: NextRequest) {
     try {
-        const properties = await Property.find({}).populate({ path: 'reviews', model: Review });
+        const userId = await getDataFromToken(request);
+        const user = await User.findById(userId);
+        if (!user) {
+            return NextResponse.json({ message: 'User not found' }, { status: 404 });
+        }
 
-        const customizedProperties = properties.map(property => {
+        const properties = await Property.find({ _id: { $in: user.likes } });
+
+        const customizedProperties = properties.map((property: any) => {
             return {
                 id: property._id,
                 averageReviews: property.averageReviews,

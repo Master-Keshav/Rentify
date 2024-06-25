@@ -28,12 +28,12 @@ const navLink = [
         "link": '/agents'
     },
     {
-        "name": "About Us",
-        "link": '/about'
+        "name": "Likes",
+        "link": '/likes'
     },
     {
-        "name": "Connect",
-        "link": '/connect'
+        "name": "About Us",
+        "link": '/aboutus'
     },
 ]
 

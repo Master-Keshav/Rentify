@@ -51,6 +51,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }],
     properties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }],
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
