@@ -129,7 +129,7 @@ const Property = ({ params }: any) => {
     };
 
     const onClickAgent = () => {
-        router.push("/agents/1");
+        router.push(`/agents/${propertyData.owner.id}`);
     };
 
     return !!propertyData && (

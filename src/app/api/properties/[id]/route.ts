@@ -45,6 +45,7 @@ export async function GET(request: NextRequest, { params }: { params: Params }) 
             totalReviews: property.totalReviews === 0 ? 2 : property.totalReviews,
             averageReviews: property.averageReviews === 0 ? 5 : property.averageReviews,
             owner: {
+                id: user._id,
                 profilePhoto: user.imageUrl,
                 about: user.about,
                 name: user.name,
