@@ -32,8 +32,8 @@ const navLink = [
         "link": '/likes'
     },
     {
-        "name": "About Us",
-        "link": '/aboutus'
+        "name": "Dashboard",
+        "link": '/dashboard'
     },
 ]
 

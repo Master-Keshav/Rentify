@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 
 import LoaderWrapper from "@/app/components/loader/LoaderWrapper";
-import NotificationWrapper from "./components/components/notification/NotificationWrapper";
+import NotificationWrapper from "@/app/components/notification/NotificationWrapper";
 
 import "./globals.css";
 
