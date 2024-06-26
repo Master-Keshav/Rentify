@@ -59,6 +59,16 @@
                     background-color: orange;
                     color: white;
                 }
+
+                &.discounted {
+                    background-color: red;
+                    color: white;
+                }
+
+                &.exclusive {
+                    background-color: purple;
+                    color: white;
+                }
             }
 
             .price {

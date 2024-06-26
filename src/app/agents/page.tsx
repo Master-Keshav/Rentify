@@ -34,7 +34,7 @@ const Agents = () => {
         fetchAgents();
     }, [dispatch]);
 
-    return (
+    return agents.length > 0 &&(
         <div className='container'>
             <div className='background'></div>
             <Navbar />

@@ -35,7 +35,7 @@ const Agents = ({ params }: any) => {
         fetchPropertyData();
     }, [params.id, dispatch]);
 
-    return (
+    return Object.keys(agentData).length > 0 && (
         <div className='container'>
             <div className='background'></div>
             <Navbar />

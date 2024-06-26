@@ -62,16 +62,12 @@ const Likes = () => {
         fetchProperties();
     }, []);
 
-    const handleTypeChange = (type: string) => {
+    const handleTagChange = (type: string) => {
         setFilteredType(type);
     };
 
-    const handleViewChange = (view: string) => {
-        setView(view);
-    };
-
     const filteredProperties = properties.filter((property: any) =>
-        filteredType === 'All' || property.houseType === filteredType
+        filteredType === 'All' || property.tag === filteredType.toLowerCase()
     );
 
     return (
@@ -79,7 +75,7 @@ const Likes = () => {
             <Navbar />
             <div className="page-list-container">
                 <div className="filter">
-                    <Filter onTypeChange={handleTypeChange} onViewChange={handleViewChange} userDetails={userData} />
+                    <Filter onTagChange={handleTagChange} userDetails={userData} />
                 </div>
                 <div className={`properties-list ${view === 'List' ? 'list-view' : ''}`}>
                     {filteredProperties.map((property: any, idx: number) => (

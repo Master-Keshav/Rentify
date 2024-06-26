@@ -28,7 +28,7 @@ const navLink = [
         "link": '/agents'
     },
     {
-        "name": "Likes",
+        "name": "Favs",
         "link": '/likes'
     },
     {

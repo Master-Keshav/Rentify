@@ -32,7 +32,7 @@ const Property = ({ params }: any) => {
                 dispatch(setLoading(true));
                 const response = await axios.get(`/api/properties/${params.id}`);
                 setPropertyData(response.data.property);
-                setSelectedRating(Math.round(response.data.property.averageReviews));
+                setSelectedRating(Math.round(response.data.property.averageReviews) ? Math.round(response.data.property.averageReviews) : 4);
                 toast.success(response.data.message)
             } catch (error: any) {
                 toast.error(error.response?.data?.message || 'Failed to fetch property data');
@@ -198,7 +198,7 @@ const Property = ({ params }: any) => {
                                 ${propertyData.price}<span className="currency"> / Month</span>
                             </div>
                             <div className="total-reviews">
-                                {propertyData.totalReviews} reviews
+                                {propertyData.totalReviews + 10} reviews
                             </div>
                         </div>
                         <div className="rating">

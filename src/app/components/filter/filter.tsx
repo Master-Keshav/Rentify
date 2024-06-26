@@ -1,7 +1,8 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { AiFillTag } from 'react-icons/ai';
+import { FiGrid } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa6';
-import { FiGrid, FiList } from 'react-icons/fi';
 import { MdDensityMedium, MdOutlineAddchart } from 'react-icons/md';
 import { TbUrgent } from 'react-icons/tb';
 
@@ -22,8 +23,7 @@ interface UserDetailsInterface {
 }
 
 interface FilterProps {
-    onTypeChange: (type: string) => void;
-    onViewChange: (view: string) => void;
+    onTagChange: (type: string) => void;
     userDetails: UserDetailsInterface
 }
 
@@ -43,39 +43,26 @@ const typeFilter = [
     {
         name: 'Urgent',
         icon: <TbUrgent />
+    },
+    {
+        name: 'Discounted',
+        icon: <AiFillTag />
+    },
+    {
+        name: 'Exclusive',
+        icon: <FiGrid />
     }
 ]
 
-const showFilter = [
-    {
-        name: 'Show as',
-        icon: null
-    },
-    {
-        name: 'Grid',
-        icon: <FiGrid />
-    },
-    {
-        name: 'List',
-        icon: <FiList />
-    },
-]
-
-const Filter: React.FC<FilterProps> = ({ onTypeChange, onViewChange, userDetails }) => {
+const Filter: React.FC<FilterProps> = ({ onTagChange, userDetails }) => {
     const router = useRouter()
 
     const [selectedType, setSelectedType] = useState('All');
-    const [selectedView, setSelectedView] = useState('Grid');
     const [modalOpen, setModalOpen] = useState(false);
 
-    const handleTypeChange = (type: string) => {
+    const handleTagChange = (type: string) => {
         setSelectedType(type);
-        onTypeChange(type);
-    };
-
-    const handleViewChange = (view: string) => {
-        setSelectedView(view);
-        onViewChange(view);
+        onTagChange(type);
     };
 
     const onCreateClick = () => {
@@ -98,25 +85,11 @@ const Filter: React.FC<FilterProps> = ({ onTypeChange, onViewChange, userDetails
                         <button
                             key={idx}
                             className={selectedType === filter.name ? 'active' : ''}
-                            onClick={() => handleTypeChange(filter.name)}
+                            onClick={() => handleTagChange(filter.name)}
                             disabled={idx === 0}
                         >
                             {filter.icon && <span className='icon'>{filter.icon}</span>}
                             <span className='name'>{filter.name}</span>
-                        </button>
-                    ))}
-                </div>
-                <div className="filterGroup">
-                    {showFilter.map((filter, idx) => (
-                        <button
-                            key={idx}
-                            className={selectedView === (idx === 1 ? 'Grid' : 'List') ? 'active' : ''}
-                            onClick={() => handleViewChange(idx === 1 ? 'Grid' : 'List')}
-                            disabled={idx === 0}
-                        >
-                            {filter.icon && <span className='icon'>{filter.icon}</span>}
-                            <span className='name'>{filter.name}</span>
-
                         </button>
                     ))}
                 </div>
