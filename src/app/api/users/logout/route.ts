@@ -15,7 +15,6 @@ export async function GET() {
                 expires: new Date(0),
                 path: "/",
             });
-        // response.headers.append('Set-Cookie', 'token=; Max-Age=0; path=/; domain=rentify-lime.vercel.app; HttpOnly');
         return response;
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
