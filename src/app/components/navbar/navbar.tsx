@@ -156,7 +156,7 @@ const Navbar: React.FC = () => {
             <div className="header-right">
                 <div className="profile">
                     <div className="profile-pic">
-                        <Image src="/background.png" alt="Profile Picture" width={60} height={40} />
+                        <Image src={`${userData.imageUrl || "/background.png"}`} alt="Profile Picture" width={60} height={40} />
                     </div>
                     <nav className="dropdownmenu">
                         <ul>
