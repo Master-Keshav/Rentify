@@ -38,7 +38,7 @@ const Hero = () => {
     })
 
     const onAboutClick = (() => {
-        router.push("/about");
+        router.push("#");
     })
     return (
         <div className='hero'>

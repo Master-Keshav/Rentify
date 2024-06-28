@@ -40,11 +40,11 @@ const navLink = [
 const navProfileLink = [
     {
         "name": "My Profile",
-        "link": '/profile'
+        "link": '#'
     },
     {
         "name": "Settings",
-        "link": '/settings'
+        "link": '#'
     },
 ]
 
@@ -120,7 +120,8 @@ const Navbar: React.FC = () => {
     const logout = async () => {
         try {
             dispatch(setLoading(true));
-            await axios.get('/api/users/logout')
+            // await axios.get('/api/users/logout')
+            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             toast.success('Logout successful')
             router.push('/login')
         } catch (error: any) {
