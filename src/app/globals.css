@@ -38,6 +38,13 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  /* Custom Colors */
+  --charcoal-blue: #333E55;
+  --dark-slate-blue: #313D54;
+  --sunset-orange: #E37430;
+  --turquoise-blue: #4AA9BC;
+  --white: #fff;
 }
 
 * {

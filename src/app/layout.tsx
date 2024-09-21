@@ -1,7 +1,7 @@
 import { Poppins } from "next/font/google";
 import React from "react";
 
-import Providers from "@/app/Providers";
+import Providers from "@/app/providers";
 import "./globals.css";
 
 const poppins_init = Poppins({

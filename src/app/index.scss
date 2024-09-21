@@ -1,7 +1,7 @@
 .hero {
     margin: auto;
     padding: 4rem;
-    color: #313D54;
+    color: var(--dark-slate-blue);
     display: flex;
     flex-direction: row;
 
@@ -18,7 +18,7 @@
             width: 30vw;
 
             span {
-                color: #E37430;
+                color: var(--sunset-orange);
             }
         }
 
@@ -27,7 +27,7 @@
             width: 40rem;
             background-color: rgb(174, 208, 225, 0.8);
             padding: 2rem;
-            color: #333E55;
+            color: var(--charcoal-blue);
             font-weight: 500;
             border-radius: 1rem;
         }
@@ -37,28 +37,6 @@
             text-align: center;
             gap: 2rem;
             padding: 1rem;
-
-            .btn {
-                margin: 1rem;
-                padding: 1rem;
-                border-radius: 20%;
-                font-size: 1.3rem;
-                font-weight: bold;
-                cursor: pointer;
-            }
-
-            .explore {
-                border: none;
-                background-color: #4AA9BC;
-                color: #fff;
-                border: 2px solid #4AA9BC;
-            }
-
-            .about {
-                background-color: transparent;
-                color: #333E55;
-                border: 2px solid #333E55;
-            }
         }
     }
 

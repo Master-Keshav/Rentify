@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
 import { hideNotification } from "@/redux/slices/notificationSlice";
 
-import "./Notification.scss";
+import "./notification.scss";
 
 const Notification: React.FC = () => {
     const dispatch = useDispatch();
