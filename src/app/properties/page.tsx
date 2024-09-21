@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 
 import Filter from '@/app/components/filter/filter';
 import Footer from '@/app/components/footer/footer';
-import Navbar from '@/app/components/navbar/navbar';
 import PropertyCard from '@/app/components/propertyCard/propertyCard';
 // import { properties } from '@/app/constants/properties';
 import { setLoading } from "@/redux/slices/loaderSlice"
@@ -73,7 +72,6 @@ const Properties = () => {
 
     return properties.length > 0 && (
         <div className="container">
-            <Navbar />
             <div className="page-list-container">
                 <div className="filter">
                     <Filter onTagChange={handleTagChange} userDetails={userData} />

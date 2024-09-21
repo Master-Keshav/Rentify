@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 const Donut = dynamic(() => import('@/app/components/charts/donut'), { ssr: false });
 const Line = dynamic(() => import('@/app/components/charts/line'), { ssr: false });
 const Bargraph = dynamic(() => import('@/app/components/charts/bargraph'), { ssr: false });
-import Navbar from '@/app/components/navbar/navbar';
 
 import "./page.scss"
 
@@ -52,7 +51,6 @@ const Dashboard = () => {
     return (
         <>
             <div className="container">
-                <Navbar />
                 <div className="charts">
                     <div className="single-charts">
                         {donutChartProps.map((chart, index) => (

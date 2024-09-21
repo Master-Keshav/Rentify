@@ -6,7 +6,6 @@ import toast from 'react-hot-toast';
 import { FaHouseChimneyWindow } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
 
-import Navbar from '@/app/components/navbar/navbar';
 import PropertyCard from '@/app/components/propertyCard/propertyCard';
 // import agentData from '@/app/constants/agentsData';
 import AgentCard from '@/app/container/AgentCard/AgentCard';
@@ -37,8 +36,6 @@ const Agents = ({ params }: any) => {
 
     return Object.keys(agentData).length > 0 && (
         <div className='container'>
-            <div className='background'></div>
-            <Navbar />
             <div className='agents-list'>
                 <AgentCard agent={agentData} />
             </div>

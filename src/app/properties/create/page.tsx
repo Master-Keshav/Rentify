@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 import { MdAddBusiness } from 'react-icons/md';
 import { useDispatch } from "react-redux";
 
-import Navbar from '@/app/components/navbar/navbar';
 import { setLoading } from "@/redux/slices/loaderSlice"
 
 import './page.scss';
@@ -121,8 +120,6 @@ const CreateProperty = () => {
 
     return (
         <div className='container'>
-            <div className='background'></div>
-            <Navbar />
             <div className="create-property-container">
                 <h2><span className='icon'><MdAddBusiness /></span> Add Your Own Property</h2>
                 <form onSubmit={handleSubmit} className="create-property-form">

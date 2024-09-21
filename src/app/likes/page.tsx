@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 
 import Filter from '@/app/components/filter/filter';
 import Footer from '@/app/components/footer/footer';
-import Navbar from '@/app/components/navbar/navbar';
 import PropertyCard from '@/app/components/propertyCard/propertyCard';
 import { setLoading } from "@/redux/slices/loaderSlice"
 import { getUserDetails } from '@/utils/userUtils';
@@ -72,7 +71,6 @@ const Likes = () => {
 
     return (
         <div className="container">
-            <Navbar />
             <div className="page-list-container">
                 <div className="filter">
                     <Filter onTagChange={handleTagChange} userDetails={userData} />

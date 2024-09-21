@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 
 // import agents from '@/app/constants/agents';
 import AgentCard from '@/app/container/AgentCard/AgentCard';
-import Navbar from '@/app/components/navbar/navbar';
 import { setLoading } from '@/redux/slices/loaderSlice';
 
 import './page.scss';
@@ -34,10 +33,8 @@ const Agents = () => {
         fetchAgents();
     }, [dispatch]);
 
-    return agents.length > 0 &&(
+    return agents.length > 0 && (
         <div className='container'>
-            <div className='background'></div>
-            <Navbar />
             <div className='agents-list'>
                 {agents.map((agent, index) => (
                     <AgentCard key={index} agent={agent} />

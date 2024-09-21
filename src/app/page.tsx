@@ -1,15 +1,63 @@
 'use client'
 
-import Hero from "./container/hero/hero";
-import Navbar from "./components/navbar/navbar";
-import styles from "./page.module.css";
-import Footer from "./components/footer/footer";
+import React from 'react';
+import { Cursor, useTypewriter } from 'react-simple-typewriter';
+import { useRouter } from 'next/navigation';
+
+import Carousel from '@/app/components/carousel/carousel';
+
+import './index.scss'
+
+const slides = [
+  {
+    image: '/car1.jpg',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit saepe voluptatibus amet.',
+  },
+  {
+    image: '/car2.jpg',
+    text: 'Qui, asperiores ex iusto voluptatum dolores quaerat, veritatis ipsum ipsa incidunt.',
+  },
+  {
+    image: '/car3.jpg',
+    text: 'Nostrum aut, sequi quo error voluptatum fuga ratione vitae repudiandae dolorem..',
+  },
+];
 
 export default function Home() {
+
+  const [text] = useTypewriter({
+    words: ['Homes', 'Ghar', 'Maisons', 'Hogars', 'Doms'],
+    loop: true,
+    typeSpeed: 120,
+    deleteSpeed: 80
+  });
+
+  const router = useRouter();
+  const onExploreClick = (() => {
+    router.push("/properties");
+  })
+
+  const onAboutClick = (() => {
+    router.push("#");
+  })
   return (
-    <main className={styles.main}>
-      <Navbar></Navbar>
-      <Hero></Hero>
-    </main>
+    <div className='hero'>
+      <div className="hero-text">
+        <h1>
+          We turn spaces into <span>{text}</span>
+          <span className="cursor">
+            <Cursor cursorStyle='|' />
+          </span>
+        </h1>
+        <div className='text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum odit alias incidunt! Non sit eius libero repudiandae, labore deserunt beatae odio at rerum, a error facere cumque quo magnam. Voluptates.</div>
+        <div className="btns">
+          <button onClick={onExploreClick} className="btn explore">Explore</button>
+          <button onClick={onAboutClick} className="btn about">About Us</button>
+        </div>
+      </div>
+      <div className="carousel">
+        <Carousel slides={slides} />
+      </div>
+    </div>
   );
-}
+};

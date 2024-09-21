@@ -12,7 +12,6 @@ import { MdBalcony, MdLocalLaundryService } from 'react-icons/md';
 import { TbToolsKitchen3 } from 'react-icons/tb';
 import { useDispatch } from "react-redux";
 
-import Navbar from '@/app/components/navbar/navbar';
 import { setLoading } from "@/redux/slices/loaderSlice"
 
 import './page.scss';
@@ -134,8 +133,6 @@ const Property = ({ params }: any) => {
 
     return !!propertyData && (
         <div className='container'>
-            <div className='background'></div>
-            <Navbar />
             <div className="property-container">
                 <div className="property-images">
                     <div className="main-image">
