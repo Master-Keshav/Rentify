@@ -12,13 +12,13 @@ import { store } from "@/redux/store";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
     const path = usePathname();
-    const ignoreNavbarPath = ['/login', '/signup', '/resetpassword', '/verifyemail']
+    const ignoreNavbarPaths = ['/login', '/signup', '/resetpassword', '/verifyemail', '/404']
 
     return (
         <>
             <div className="background"></div>
             <Provider store={store}>
-                {!ignoreNavbarPath.includes(path) && <Navbar />}
+                {!ignoreNavbarPaths.includes(path) && <Navbar />}
                 <LoaderWrapper />
                 <Notification />
                 <Toaster position="top-right" />
