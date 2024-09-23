@@ -1,21 +1,17 @@
 'use client'
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import './index.scss';
 
 const NotFound = () => {
-    const router = useRouter();
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            router.push('/404');
-        });
-
-        return () => clearTimeout(timer);
-    }, [router]);
-
     return (
-        <> </>
+        <div className="not-found-container">
+            <div className="not-found-text-wrapper">
+                <div className="text">
+                    <h1>Page Not Found!</h1>
+                    <h2>Please check the URL or contact the owner.</h2>
+                </div>
+            </div>
+        </div>
     );
 };
 
