@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { usePathname } from "next/navigation";
 
 import LoaderWrapper from "@/app/components/loader/loaderWrapper";
-import Navbar from "@/app/components/navbar/navbar";
+import Navbar from "@/components/navbar";
 import Notification from "@/app/components/notification/notification";
 import { store } from "@/redux/store";
 

@@ -8,14 +8,14 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
-import Logo from '../../../../public/logo.png'
+import Logo from '../../public/logo.png'
 import { navLink, navProfileLink } from '@/app/constants/navbar'
 import { UserDetailsInterface } from '@/interfaces/navbar'
 import { setLoading } from "@/redux/slices/loaderSlice";
 import { hideNotification, showNotification } from "@/redux/slices/notificationSlice";
 import { getUserDetails } from "@/utils/userUtils";
 
-import './index.scss'
+import './styles/navbar.scss'
 
 const Navbar: React.FC = () => {
     const dispatch = useDispatch();
