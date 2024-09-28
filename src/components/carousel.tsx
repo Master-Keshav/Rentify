@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
 
-import './index.scss';
+import './styles/carousel.scss';
 
 const Carousel = ({ slides }: any) => {
     const [currentSlide, setCurrentSlide] = useState(0);

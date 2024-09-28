@@ -8,57 +8,14 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
+import Logo from '../../../../public/logo.png'
+import { navLink, navProfileLink } from '@/app/constants/navbar'
+import { UserDetailsInterface } from '@/interfaces/navbar'
 import { setLoading } from "@/redux/slices/loaderSlice";
 import { hideNotification, showNotification } from "@/redux/slices/notificationSlice";
 import { getUserDetails } from "@/utils/userUtils";
 
 import './index.scss'
-
-const navLink = [
-    {
-        "name": "Home",
-        "link": '/'
-    },
-    {
-        "name": "Properties",
-        "link": '/properties'
-    },
-    {
-        "name": "Agents",
-        "link": '/agents'
-    },
-    {
-        "name": "Favs",
-        "link": '/likes'
-    },
-    {
-        "name": "Dashboard",
-        "link": '/dashboard'
-    },
-]
-
-const navProfileLink = [
-    {
-        "name": "My Profile",
-        "link": '#'
-    },
-    {
-        "name": "Settings",
-        "link": '#'
-    },
-]
-
-interface UserDetailsInterface {
-    id?: string;
-    username?: string;
-    name?: string;
-    email?: string;
-    phonenumber?: string | number;
-    experience?: string | number;
-    about?: string;
-    imageUrl?: string;
-    hasPassword?: boolean;
-}
 
 const Navbar: React.FC = () => {
     const dispatch = useDispatch();
@@ -75,6 +32,7 @@ const Navbar: React.FC = () => {
             }
         };
         fetchUserDetails();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onResetPassword = async () => {
@@ -115,6 +73,7 @@ const Navbar: React.FC = () => {
         };
 
         showPasswordNotification();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userData]);
 
     const logout = async () => {
@@ -138,7 +97,7 @@ const Navbar: React.FC = () => {
             <div className="header-left">
                 <Link href="/">
                     <div>
-                        <Image src="/logo.png" alt="Logo" width={120} height={150} />
+                        <Image alt="Logo" src={Logo} width={140} height={80} loading="eager" />
                     </div>
                 </Link>
             </div>

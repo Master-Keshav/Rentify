@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import './index.scss';
+import './styles/button.scss';
 
 interface ButtonProps {
     handleOnClick?: () => void;

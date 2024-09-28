@@ -4,9 +4,9 @@ import React from 'react';
 import { Cursor, useTypewriter } from 'react-simple-typewriter';
 import { useRouter } from 'next/navigation';
 
-import Button from '@/app/components/button/button';
-import Carousel from '@/app/components/carousel/carousel';
-import { slides, typeWriterWords } from '@/app/constants/carousel';
+import Button from '@/components/button';
+import Carousel from '@/components/carousel';
+import { slides, typeWriterWords } from '@/constants/hero';
 
 import './index.scss'
 
@@ -60,3 +60,15 @@ export default function Home() {
     </div>
   );
 };
+
+// interface MetadataProps {
+//   title: string;
+//   description: string;
+// }
+
+// export function generateMetadata(): MetadataProps {
+//   return {
+//       title: 'Agents',
+//       description: 'Rentify Agents page',
+//   }
+// };
