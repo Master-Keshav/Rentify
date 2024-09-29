@@ -5,17 +5,19 @@ import './styles/button.scss';
 
 interface ButtonProps {
     handleOnClick?: () => void;
-    color?: string;
+    textColor?: string;
+    iconColor?: string;
     backgroundColor?: string;
     text: string;
     borderColor?: string;
+    logo?: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({ handleOnClick, color, backgroundColor, borderColor, text }) => {
+const Button: React.FC<ButtonProps> = ({ handleOnClick, textColor, iconColor, backgroundColor, borderColor, text, logo }) => {
     const buttonStyle = {
         backgroundColor: backgroundColor || "white",
-        color: color || "black",
-        borderColor: `${borderColor || backgroundColor || color || "white"}`,
+        color: textColor || "black",
+        borderColor: `${borderColor || backgroundColor || textColor || "white"}`,
     };
 
     return (
@@ -25,6 +27,15 @@ const Button: React.FC<ButtonProps> = ({ handleOnClick, color, backgroundColor, 
             className="btn"
         >
             {text || "Button Text Here"}
+            {
+                logo &&
+                <span
+                    className="btn-logo"
+                    style={{ color: iconColor || "white" }}
+                >
+                    {logo}
+                </span>
+            }
         </button>
     );
 }

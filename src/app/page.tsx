@@ -42,13 +42,13 @@ export default function Home() {
           <Button
             handleOnClick={onExploreClick}
             text="Explore"
-            color='var(--white)'
+            textColor='var(--white)'
             backgroundColor='var(--turquoise-blue)'
           />
           <Button
             handleOnClick={onAboutClick}
             text="About Us"
-            color='var(--charcoal-blue)'
+            textColor='var(--charcoal-blue)'
             backgroundColor='transparent'
             borderColor='var(--charcoal-blue)'
           />

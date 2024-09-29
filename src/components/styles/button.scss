@@ -7,6 +7,7 @@
     transition: background-color 0.3s ease;
     border: 2px solid white;
     cursor: pointer;
+    display: flex;
 
     &:hover {
         -webkit-filter: brightness(85%); /* Chrome, Safari */
@@ -20,5 +21,10 @@
         -o-transition: all 0.5s ease;
         -ms-transition: all 0.5s ease;
         transition: all 0.5s ease;
+    }
+
+    .btn-logo {
+        transform: translateY(6%);
+        margin-left: 0.4rem;
     }
 }

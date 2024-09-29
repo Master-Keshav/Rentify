@@ -35,6 +35,10 @@ const LoginPage = () => {
         }
     };
 
+    useEffect(() => {
+        dispatch(setLoading(false));
+    });
+
     const onLogin = async () => {
         try {
             dispatch(setLoading(true));

@@ -10,7 +10,7 @@
         border: 10px solid white;
         border-radius: 15px;
         width: 75%;
-        color: #343F57;
+        color: var(--prusian-blue);
 
         .property-images {
             display: grid;
@@ -195,7 +195,7 @@
                             border-radius: 5px;
                             border: 1px solid #396AFD;
                             background-color: #F5F5F5;
-                            color: #343F57;
+                            color: var(--prusian-blue);
                             resize: none;
                             font-size: 1rem;
 

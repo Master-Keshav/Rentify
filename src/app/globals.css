@@ -40,11 +40,29 @@
   --card-border-rgb: 131, 134, 135;
 
   /* Custom Colors */
-  --charcoal-blue: #333E55;
-  --dark-slate-blue: #313D54;
-  --sunset-orange: #E37430;
-  --turquoise-blue: #4AA9BC;
   --white: #fff;
+  --platinum: #DFDFE0;
+
+  /* Blue Tones */
+  --turquoise-blue: #4AA9BC;
+  --steel-blue: #6E9EBF;
+  --charcoal-blue: #333E55;
+  --prussian-blue: #343F57;
+  --midnight-blue: #34495e;
+
+  /* Green Tones */
+  --light-teal: #30a6a6;
+  --medium-sea-green: #06b189;
+  --emerald: #1dbf99;
+
+  /* Red / Orange Tones */
+  --sunset-orange: #E37430;
+  --orange-red: #df4b05;
+  --crimson-red: #df2b2b;
+
+  /* Yellow Tones */
+  --golden-yellow: #FFD700;
+  --light-gold: #F6E58D;
 }
 
 * {
@@ -57,6 +75,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .background {
@@ -66,10 +85,11 @@ body {
   width: 100%;
   height: 100%;
   background-color: #DFDFE0;
-  background-image: url('/background.png');
+  background: url('/background.png') no-repeat center center/cover;
+  /* background-image: url('/background.png');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: fixed; */
   filter: blur(3px);
   z-index: -1;
 }
@@ -93,6 +113,11 @@ span,
 a,
 div {
   font-family: var(--font-primary);
+}
+
+.invisible {
+  visibility: hidden;
+  transition: all 0.25s ease;
 }
 
 /* @tailwind base; 
