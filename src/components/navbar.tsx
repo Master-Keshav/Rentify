@@ -21,6 +21,22 @@ import { getUserDetails } from "@/utils/userUtils";
 
 import './styles/navbar.scss'
 
+const useMediaQuery = (query: any) => {
+    const [matches, setMatches] = useState(false);
+
+    useEffect(() => {
+        const media = window.matchMedia(query);
+        if (media.matches !== matches) {
+            setMatches(media.matches);
+        }
+        const listener = () => setMatches(media.matches);
+        media.addListener(listener);
+        return () => media.removeListener(listener);
+    }, [matches, query]);
+
+    return matches;
+};
+
 const Navbar: React.FC = () => {
     const dispatch = useDispatch();
     const router = useRouter();
@@ -29,8 +45,9 @@ const Navbar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hamburgerMidLinks, setHamburgerMidLinks] = useState(hamburgerMidNoUserLinks);
 
-    const isMediumScreen = () => window.innerWidth >= 1100 && window.innerWidth < 1425;
-    const isSmallScreen = () => window.innerWidth < 1100;
+    const isLargeScreen = useMediaQuery('(min-width: 1425px)');
+    const isMediumScreen = useMediaQuery('(min-width: 1100px) and (max-width: 1424px)');
+    const isSmallScreen = useMediaQuery('(max-width: 1099px)');
 
     useEffect(() => {
         const fetchUserDetails = async () => {
@@ -51,6 +68,12 @@ const Navbar: React.FC = () => {
             setHamburgerMidLinks(hamburgerMidUserLinks);
         }
     }, [user])
+
+    useEffect(() => {
+        if (isLargeScreen) {
+            setIsMenuOpen(false);
+        }
+    }, [isLargeScreen])
 
     const onResetPassword = async () => {
         try {
@@ -171,7 +194,7 @@ const Navbar: React.FC = () => {
                 <IoClose className="close-icon" size={30} onClick={() => setIsMenuOpen(false)} />
                 <nav>
                     <ul>
-                        {isMediumScreen() && hamburgerMidLinks.map((item, idx) => (
+                        {isMediumScreen && hamburgerMidLinks.map((item, idx) => (
                             <li key={idx}>
                                 <Link onClick={() => setIsMenuOpen(false)} href={item.link}>
                                     {item.icon}
@@ -179,7 +202,7 @@ const Navbar: React.FC = () => {
                                 </Link>
                             </li>
                         ))}
-                        {isSmallScreen() && hamburgerSmallLinks.concat(hamburgerMidNoUserLinks).map((item, idx) => (
+                        {isSmallScreen && hamburgerSmallLinks.concat(hamburgerMidNoUserLinks).map((item, idx) => (
                             <li key={idx}>
                                 <Link onClick={() => setIsMenuOpen(false)} href={item.link}>
                                     {item.icon}
