@@ -8,14 +8,14 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: [true, "Please provide a email"],
+        required: [true, "Please provide an email"],
         unique: true,
     },
     password: {
         type: String,
-        required: [true, "Please provide a password"],
+        required: false,
     },
-    isVerfied: {
+    isVerified: {
         type: Boolean,
         default: false,
     },
@@ -23,11 +23,43 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    name: {
+        type: String,
+        default: null,
+    },
+    imageUrl: {
+        type: String,
+        default: null
+    },
+    phonenumber: {
+        type: Number,
+        default: null,
+    },
+    experience: {
+        type: Number,
+        default: null,
+    },
+    about: {
+        type: String,
+        default: null,
+    },
+    source: {
+        type: Number,
+        default: 0,
+    },
+    googleId: {
+        type: String,
+        default: "",
+    },
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }],
+    properties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }],
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,
     verifyTokenExpiry: Date,
-})
+}, {
+    timestamps: true,
+});
 
 const User = mongoose.models.users || mongoose.model("users", userSchema);
 

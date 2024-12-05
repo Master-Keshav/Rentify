@@ -1,95 +1,74 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+
+import React from 'react';
+import { Cursor, useTypewriter } from 'react-simple-typewriter';
+import { useRouter } from 'next/navigation';
+
+import Button from '@/components/button';
+import Carousel from '@/components/carousel';
+import { slides, typeWriterWords } from '@/constants/hero';
+
+import './index.scss'
 
 export default function Home() {
+  const router = useRouter();
+
+  const [text] = useTypewriter({
+    words: typeWriterWords,
+    loop: true,
+    typeSpeed: 120,
+    deleteSpeed: 80
+  });
+
+  const onExploreClick = (() => {
+    router.push("/properties");
+  })
+
+  const onAboutClick = (() => {
+    router.push("#");
+  })
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className='hero'>
+      <div className="hero-text">
+        <h1>
+          We turn spaces into <span>{text}</span>
+          <span className="cursor">
+            <Cursor cursorStyle='|' />
+          </span>
+        </h1>
+        <div className='text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum odit alias incidunt! Non sit eius libero repudiandae, labore deserunt beatae odio at rerum, a error facere cumque quo magnam. Voluptates.</div>
+        <div className="btns">
+          <Button
+            handleOnClick={onExploreClick}
+            text="Explore"
+            textColor='var(--white)'
+            backgroundColor='var(--turquoise-blue)'
+          />
+          <Button
+            handleOnClick={onAboutClick}
+            text="About Us"
+            textColor='var(--charcoal-blue)'
+            backgroundColor='transparent'
+            borderColor='var(--charcoal-blue)'
+          />
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="carousel">
+        <Carousel slides={slides} />
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
-}
+};
+
+// interface MetadataProps {
+//   title: string;
+//   description: string;
+// }
+
+// export function generateMetadata(): MetadataProps {
+//   return {
+//       title: 'Agents',
+//       description: 'Rentify Agents page',
+//   }
+// };

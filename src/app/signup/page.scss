@@ -1,0 +1,126 @@
+.wrapper {
+    width: 420px;
+    background: transparent;
+    color: #fff;
+    padding: 30px 40px;
+    border: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    backdrop-filter: blur(50px);
+    border-radius: 10px;
+
+    h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .input-box {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        margin: 20px 0;
+        font-size: 16px;
+        padding: 10px;
+
+        input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, .2);
+            outline: none;
+            border-radius: 40px;
+            font-size: 16px;
+            color: #fff;
+            padding: 20px 45px 20px 20px;
+        }
+
+        input::placeholder {
+            color: #fff;
+        }
+
+        .icon {
+            position: absolute;
+            right: 30px;
+            top: 65%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #fff;
+            font-size: 18px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                color: #76c7c0;
+            }
+        }
+    }
+
+    button {
+        width: 100%;
+        height: 45px;
+        background: #fff;
+        border: none;
+        outline: none;
+        border-radius: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, -1);
+        cursor: pointer;
+        font-size: 16px;
+        color: #333;
+        font-weight: 700;
+        margin-bottom: 10px;
+
+        &:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    }
+
+    .or-separator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0;
+        color: #fff;
+        font-weight: bold;
+
+        .line {
+            width: 45%;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .or {
+            padding: 0 10px;
+        }
+    }
+
+    .google-signup-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // background-color: #4285F4;
+        background-color: #FFFFFF;
+        margin-top: 10px;
+        height: 45px;
+        border-radius: 40px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .swap-page {
+        font-size: 14.5px;
+        text-align: center;
+        margin-top: 20px;
+
+        .link {
+            cursor: pointer;
+            color: #fff;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

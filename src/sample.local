@@ -1,0 +1,8 @@
+MONGO_URI=mongodb+srv://admin:admin@rentify.sdgaerd.mongodb.net/rentify?retryWrites=true&w=majority
+TOKEN_SECRET=keshavvyas484
+DOMAIN=http://localhost:3000
+TRANSPORT_USER=a86e30945827c7
+TRANSPORT_PASS=83b8c78adf0271
+NEXT_PUBLIC_IMG_BB_API_KEY=42258505da6e6849da2b8dbfe7ce5f69
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=1006301797021-dqh41o852gfkhm84nki5jr27ivf2r2h6.apps.googleusercontent.com
+NEXT_PUBLIC_GOOGLE_CLIENT_SECRET=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

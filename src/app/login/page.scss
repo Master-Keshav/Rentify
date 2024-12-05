@@ -1,0 +1,144 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.background-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+}
+
+.wrapper {
+    width: 420px;
+    background: transparent;
+    color: #fff;
+    padding: 30px 40px;
+    border: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    backdrop-filter: blur(50px);
+    border-radius: 10px;
+
+    h1 {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .input-box {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        margin: 20px 0;
+        font-size: 16px;
+        color: #fff;
+        padding: 10px;
+
+        input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, .2);
+            outline: none;
+            border-radius: 40px;
+            font-size: 16px;
+            color: #fff;
+            padding: 20px 45px 20px 20px;
+        }
+
+        input::placeholder {
+            color: #fff;
+        }
+
+        .icon {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-5);
+        }
+    }
+
+    .remember-forgot {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14.5px;
+        margin: 15px;
+
+        label {
+            input {
+                accent-color: #fff;
+                margin-right: 4px;
+            }
+
+            input:hover {
+                accent-color: rgb(195, 195, 195);
+            }
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+
+    button {
+        width: 100%;
+        height: 45px;
+        background: #fff;
+        border: none;
+        outline: none;
+        border-radius: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, -1);
+        cursor: pointer;
+        font-size: 16px;
+        color: #333;
+        font-weight: 700;
+
+        &:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    }
+
+    .google-login-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // background-color: #4285F4;
+        background-color: #FFFFFF;
+        margin-top: 10px;
+        height: 45px;
+        border-radius: 40px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .swap-page {
+        font-size: 14.5px;
+        text-align: center;
+        margin-top: 20px;
+
+        .link {
+            cursor: pointer;
+            color: #fff;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

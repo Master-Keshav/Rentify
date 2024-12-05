@@ -1,23 +1,29 @@
-import {connect} from "@/dbConfig/dbConfig";
-import User from "@/models/userModel";
-import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-// import { sendEmail } from "@/helpers/mailer";
+import { NextRequest, NextResponse } from "next/server";
+
+import { connect } from "@/dbConfig/dbConfig";
+import { sendEmail } from "@/helpers/mailers";
+import User from "@/models/userModel";
 
 connect()
 
-export async function POST(request: NextRequest){
+export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()
-        const {username, email, password} = reqBody
+        const { username, email, password } = reqBody
 
         console.log(reqBody);
 
         //check if user already exists
-        const user = await User.findOne({email})
+        const user = await User.findOne({ email })
 
-        if(user){
-            return NextResponse.json({error: "User already exists"}, {status: 400})
+        if (user && user.isVerified) {
+            return NextResponse.json({ message: "User already exists" }, { status: 400 })
+        }
+
+        if (user) {
+            await sendEmail({ email, emailType: "VERIFY", userId: user._id })
+            return NextResponse.json({ message: "Verfication Mail Sent" })
         }
 
         //hash password
@@ -35,16 +41,14 @@ export async function POST(request: NextRequest){
 
         //send verification email
 
-        // await sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
+        await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
 
         return NextResponse.json({
-            message: "User created successfully",
+            message: "Verfication Mail Sent",
             success: true,
             savedUser
         })
-
     } catch (error: any) {
-        return NextResponse.json({error: error.message}, {status: 500})
-
+        return NextResponse.json({ message: error.message }, { status: 500 })
     }
 }
